@@ -1,5 +1,6 @@
 import { Schema, model, models } from 'mongoose';
 import {ObjectId} from "mongodb";
+import {enumToString} from "mongodb/src/utils";
 
 const questionSchema = new Schema({
     questionNumber: {
@@ -28,6 +29,14 @@ const paperSchema = new Schema({
     _id: {
         type: ObjectId
     },
+    entity: {
+        type: String,
+        required: false
+    },
+    examination: {
+        type: String,
+        required: false
+    },
     paperYear: {
         type: Number,
         required: true
@@ -43,6 +52,18 @@ const paperSchema = new Schema({
     courseYear: {
         type: String,
         required: true
+    },
+    courseSemester: {
+        type: Number,
+        required: false
+    },
+    time: {
+        type: Number,
+        required: false
+    },
+    instructions: {
+        type: String,
+        required: false
     },
     questions: [questionSchema]
 });
