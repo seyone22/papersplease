@@ -1,24 +1,11 @@
-'use client'
-
-import { useEffect, useState } from 'react';
 import styles from './page.module.css'
 
-import { paperService } from "../../services/paper.service";
+import { fetchPapers } from "../../utils/database";
 
-export default function Home() {
-    const [papers, setPapers] = useState({ documents: [] });
+export default async function Home() {
+    let paperList = await getData();
 
-    useEffect(() => {
-        paperService.getAll()
-            .then(data => {
-                setPapers(data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, []);
-
-    console.log(papers);
+    console.log(paperList);
 
   return (
     <main className={styles.main}>
@@ -27,7 +14,7 @@ export default function Home() {
         <h1>Papers Please!</h1>
       </div>
         <div className={styles.grid}>
-            {papers.documents.map(paper => (
+            {paperList.map(paper => (
                 <div key={paper.id}>
                     <a href={`/papers/${paper._id}`}>
                         <p>{paper.paperCourseId}</p>
@@ -43,3 +30,7 @@ export default function Home() {
   )
 }
 
+async function getData() {
+    let papers = await fetchPapers();
+    return papers;
+}

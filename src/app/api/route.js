@@ -4,6 +4,8 @@ import Paper from "../../../models/Paper";
 import { ObjectId } from 'mongodb';
 import mongoose from "mongoose";
 
+import { fetchPapers } from 'utils/database'
+
 export async function POST(req) {
 
     try {
@@ -27,19 +29,29 @@ export async function POST(req) {
 
 }
 
-export async function GET() {
-    try {
-        console.log("CONNECTING TO MONGO");
-        await connectMongo();
-        console.log("CONNECTED TO MONGO");
+export async function GET(req) {
+    console.log(req.json());
+    if (false) {
+        try {
+            console.log('SEARCHING...');
+            const documents = await fetchPapers();
+            console.log("FOUND DOCUMENT!");
 
-        console.log('SEARCHING...');
-        const documents = await Paper.find().exec();
-        console.log("FOUND DOCUMENT!");
+            return NextResponse.json({documents})
+        } catch (error) {
+            console.log(error);
+            return NextResponse.json({error});
+        }
+    } else {
+        try {
+            console.log('SEARCHING...');
+            const documents = await fetchPapers();
+            console.log("FOUND DOCUMENT!");
 
-        return NextResponse.json({ documents })
-    } catch (error) {
-        console.log(error);
-        return NextResponse.json({ error });
+            return NextResponse.json({documents})
+        } catch (error) {
+            console.log(error);
+            return NextResponse.json({error});
+        }
     }
 }
