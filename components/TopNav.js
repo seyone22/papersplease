@@ -12,6 +12,16 @@ const TopNav = () => {
                     </Link>
                 </li>
                 <li className={styles.navItem}>
+                    <Link href="/papers/new">
+                        Contribute
+                    </Link>
+                </li>
+                <li className={styles.navItem}>
+                    <Link href="/all">
+                        Papers
+                    </Link>
+                </li>
+                <li className={styles.navItem}>
                     <Link href="/about">
                         About
                     </Link>

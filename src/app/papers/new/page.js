@@ -1,23 +1,40 @@
 'use client'
 import { useState } from 'react';
+//DOES NOT WORK IN FIREFOX
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
-import { Formik } from 'formik';
+import styles from './page.module.css'
 
 function FormPage() {
-
     return (
         <div>
-            <h1>Form Page</h1>
-
-            <Formik initialValues={ { email: '', password: '' }}
-                    onSubmit={(values, { setSubmitting }) => {
-                        setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
-                            setSubmitting(false);
-                        }, 400);
-                    }}>
-
+            <h1>Add new exam paper</h1>
+            <h2>General details</h2>
+            <Formik
+                initialValues={{ year: '', name: '', courseId: '', courseYear: '', questions: '' }}
+                onSubmit={(values, { setSubmitting }) => {
+                    setTimeout(() => {
+                        //Code here does something with the submitted data.
+                        alert(JSON.stringify(values, null, 2));
+                        setSubmitting(false);
+                    }, 400);
+                }}
+            >
+                {({ isSubmitting }) => (
+                    <Form>
+                        <label htmlFor="year">Year</label>
+                        <Field type="number" name="year" />
+                        <ErrorMessage name="year" component="div" />
+                        <label htmlFor="name">Paper Name</label>
+                        <Field type="name" name="name" />
+                        <ErrorMessage name="name" component="div" />
+                        <button type="submit" disabled={isSubmitting}>
+                            Submit
+                        </button>
+                    </Form>
+                )}
             </Formik>
+        </div>
     );
 }
 

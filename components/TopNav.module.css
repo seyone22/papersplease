@@ -1,16 +1,18 @@
 /* TopNav.module.css */
 .navContainer {
-
+    position: absolute;
+    top: 0;
+    margin: 40px;
+    z-index: 999;
 }
 
 .navItemList {
     list-style-type: none !important;
     margin: 0 !important;
-    padding: 0 !important;
-
 }
 
 .navItem {
     display: inline-block !important;
-    margin-right: 20px !important;
+    padding-left: 35px;
+    padding-right: 35px;
 }

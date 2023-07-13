@@ -1,9 +1,9 @@
-import styles from '/src/app/page.module.css'
+import styles from './page.module.css'
 
 import { fetchPaperById } from 'utils/database'
 
 import TopNav from 'components/TopNav'
-
+import QuestionExpander from "../../../../components/QuestionExpander";
 export default async function PaperDetail({params}) {
 
 let currentPaper = await getData(params.id);
@@ -16,10 +16,17 @@ let currentPaper = await getData(params.id);
             <div className={styles.center}>
                 <h2>{currentPaper.paperYear}</h2>
                 <h1>{currentPaper.paperName}</h1>
-
-                <p>
-                    {currentPaper.questions[1].questionBody}
-                </p>
+            </div>
+            <div className={styles.grid}>
+                {
+                    currentPaper.questions.map((question, index) => (
+                        <div className={styles.card} key={index}>
+                            <span className={styles.partNumber}> {question.partNumber}. </span>
+                            <span className={styles.questionBody}>{question.questionBody}</span>
+                            <span className={styles.marks}>[{question.marks}%]</span>
+                        </div>
+                    ))
+                }
 
             </div>
 
