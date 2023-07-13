@@ -45,7 +45,7 @@ function FormPage() {
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="name">Name</label>
-                    <input type="text" id="name" name="name" onChange={handleChange} />
+                    <input tnpype="text" id="name" name="name" onChange={handleChange} />
                 </div>
                 <div>
                     <label htmlFor="email">Email</label>
