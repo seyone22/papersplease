@@ -105,3 +105,11 @@ a {
     color-scheme: dark;
   }
 }
+
+.container {
+  /* Add your CSS styles here */
+  /* Example styles */
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
