@@ -1,0 +1,16 @@
+/* TopNav.module.css */
+.navContainer {
+
+}
+
+.navItemList {
+    list-style-type: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+
+}
+
+.navItem {
+    display: inline-block !important;
+    margin-right: 20px !important;
+}

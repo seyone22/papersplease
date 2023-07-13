@@ -2,12 +2,16 @@ import styles from '/src/app/page.module.css'
 
 import { fetchPaperById } from 'utils/database'
 
+import TopNav from 'components/TopNav'
+
 export default async function PaperDetail({params}) {
 
 let currentPaper = await getData(params.id);
 
     return (
         <main className={styles.main}>
+
+            <TopNav />
 
             <div className={styles.center}>
                 <h2>{currentPaper.paperYear}</h2>
