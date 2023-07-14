@@ -2,7 +2,7 @@ import { Schema, model, models } from 'mongoose';
 import {ObjectId} from "mongodb";
 import {enumToString} from "mongodb/src/utils";
 
-const questionSchema = new Schema({
+const subpartSchema = new Schema({
     questionNumber: {
         type: Number,
         required: true
@@ -22,7 +22,36 @@ const questionSchema = new Schema({
     marks: {
         type: Number,
         required: true
-    }
+    },
+})
+
+const partSchema = new Schema({
+    questionNumber: {
+        type: Number,
+        required: true
+    },
+    partNumber: {
+        type: String,
+        required: true
+    },
+    questionBody: {
+        type: String,
+        required: true
+    },
+    attachments: [String],
+    marks: {
+        type: Number,
+        required: true
+    },
+    subparts: [subpartSchema]
+})
+
+const questionSchema = new Schema({
+    questionNumber: {
+        type: Number,
+        required: true
+    },
+    parts: [partSchema]
 });
 
 const paperSchema = new Schema({
