@@ -1,14 +1,11 @@
-'use client'
-import { useState } from 'react';
-
-import { Formik } from 'formik';
 import React from 'react';
+import styles from './page.module.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 function FormPage() {
   return (
     <div>
-      <h1>Login Form</h1>
+      <h2>Login</h2>
       <Formik
         initialValues={{ email: '', password: '' }}
         validate={(values) => {
@@ -38,27 +35,14 @@ function FormPage() {
               <ErrorMessage name="email" component="div" />
             </div>
 
-    return (
-        <div>
-            <h1>Form Page</h1>
-
-            <Formik initialValues={ { email: '', password: '' }}
-                    onSubmit={(values, { setSubmitting }) => {
-                        setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
-                            setSubmitting(false);
-                        }, 400);
-                    }}>
             <div>
               <label htmlFor="password">Password</label>
               <Field type="password" name="password" />
               <ErrorMessage name="password" component="div" />
             </div>
 
-            </Formik>
-    );
             <button type="submit" disabled={isSubmitting}>
-              Submit
+              Login
             </button>
           </Form>
         )}
