@@ -23,7 +23,9 @@ export default async function PaperDetail({ params }) {
 
                         {question.parts.map((part, partIndex) => (
                             <div className={styles.card} key={partIndex}>
-                                {part.partNumber}. {part.questionBody}
+                                <a href={`/papers/${currentPaper._id}/${question.questionNumber}/${part.partNumber}`}>
+                                    {part.partNumber}. {part.questionBody}
+                                </a>
                             </div>
                         ))}
                     </div>
@@ -32,7 +34,6 @@ export default async function PaperDetail({ params }) {
         </main>
     );
 }
-
 
 async function getData(id) {
     let paper = await fetchPaperById(id);

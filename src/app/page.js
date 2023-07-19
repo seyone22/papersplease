@@ -6,8 +6,6 @@ import TopNav from "../../components/TopNav";
 export default async function Home() {
     let paperList = await getData();
 
-    console.log(paperList);
-
   return (
     <main className={styles.main}>
         <TopNav />
