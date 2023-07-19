@@ -22,11 +22,10 @@ export async function POST(req) {
         return NextResponse.json({ newPaper })
 
     } catch (error) {
+        let message = error.message;
         console.log(error);
-        return NextResponse.json({ error });
+        return NextResponse.json({ message });
     }
-
-
 }
 
 export async function GET(req) {
@@ -50,8 +49,9 @@ export async function GET(req) {
 
             return NextResponse.json({documents})
         } catch (error) {
+            let message = error.message;
             console.log(error);
-            return NextResponse.json({error});
+            return NextResponse.json({ message });
         }
     }
 }
@@ -64,7 +64,7 @@ export async function PUT(req) {
 
         console.log('UPDATING PAPER');
 
-        const paperId = req.params.id; // Assuming you are passing the paper ID in the URL
+        const paperId = req.nextUrl.searchParams.get("id"); // Assuming you are passing the paper ID in the URL
         let updatedPaper = await req.json();
 
         // Validate that updatedPaper has some data before proceeding with the update
@@ -84,8 +84,9 @@ export async function PUT(req) {
         return NextResponse.json({ updatedPaper });
 
     } catch (error) {
+        let message = error.message;
         console.log(error);
-        return NextResponse.json({ error });
+        return NextResponse.json({ message });
     }
 }
 
@@ -95,7 +96,7 @@ export async function DELETE(req) {
         await connectMongo();
         console.log("CONNECTED TO MONGO");
 
-        const paperId = await req.nextUrl.searchParams.get("id"); // Assuming you are passing the paper ID in the URL
+        const paperId = req.nextUrl.searchParams.get("id"); // Assuming you are passing the paper ID in the URL
         const deletedPaper = await Paper.findByIdAndDelete(new mongoose.Types.ObjectId(paperId));
 
         if (!deletedPaper) {
@@ -103,11 +104,11 @@ export async function DELETE(req) {
         }
 
         console.log("DELETED PAPER");
-
         return NextResponse.json({ deletedPaper });
 
     } catch (error) {
+        let message = error.message;
         console.log(error);
-        return NextResponse.json({ error });
+        return NextResponse.json({ message });
     }
 }
