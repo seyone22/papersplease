@@ -22,7 +22,7 @@ let currentPaper = await getData(params.id);
                 </p>
 
             </div>
-
+ thi
         </main>
     )
 }
