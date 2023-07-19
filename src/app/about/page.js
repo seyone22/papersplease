@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import './globals.css'
+import 'globals'
 import { Inter } from 'next/font/google'
 
 const About = () => {
@@ -23,7 +23,7 @@ const About = () => {
                     </li>
                 ))}
             </ul>
-            <Link href="/">Go back to homepage</Link>
+
         </div>
     );
 };
