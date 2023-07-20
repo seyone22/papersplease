@@ -17,7 +17,8 @@ export default async function Home() {
 
             <h2 className={styles.centered}>Browse Examination Papers</h2>
             <div className={styles.searchBox}>
-                <SearchBox/>
+
+
             </div>
             <div className={styles.grid}>
                 {paperList.map(paper => (
