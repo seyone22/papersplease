@@ -4,13 +4,13 @@ import { fetchPaperById } from 'utils/database'
 
 import TopNav from 'components/TopNav'
 import QuestionExpander from "../../../../components/QuestionExpander";
+import SearchBox from "../../../../components/SearchBox";
 export default async function PaperDetail({ params }) {
     let currentPaper = await getData(params.id);
 
     return (
         <main className={styles.main}>
             <TopNav />
-
             <div className={styles.center}>
                 <h2>{currentPaper.paperYear}</h2>
                 <h1>{currentPaper.paperName}</h1>

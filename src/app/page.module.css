@@ -108,6 +108,12 @@
 .logo {
   position: relative;
 }
+
+.searchBox {
+  margin: 0px 20px;
+  width: 40vw;
+}
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
@@ -201,12 +207,21 @@
     );
     z-index: 1;
   }
+
+  .searchBox {
+    width: 60vw;
+  }
 }
 
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
     grid-template-columns: repeat(2, 50%);
+  }
+
+  .searchBox {
+    margin: 0px 20px;
+    width: 60vw;
   }
 }
 
@@ -229,11 +244,6 @@
   }
 }
 
-.searchBox {
-  margin: 0px 20px;
-  width: 60vw;
-}
-
 .centered {
   text-align: center;
 }
@@ -241,3 +251,4 @@
 .onTop {
   z-index: 999;
 }
+
