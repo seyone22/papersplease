@@ -1,18 +1,76 @@
 /* TopNav.module.css */
+
 .navContainer {
     position: absolute;
     top: 0;
-    margin: 40px;
+    left: 0;
+    right: 0;
+    padding: 20px;
     z-index: 999;
 }
 
 .navItemList {
-    list-style-type: none !important;
-    margin: 0 !important;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
 }
 
 .navItem {
-    display: inline-block !important;
-    padding-left: 35px;
-    padding-right: 35px;
+    display: inline-block;
+    padding: 10px 15px;
+}
+
+.hamburgerMenu {
+    display: none; /* Initially hide the hamburger menu on larger screens */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.hamburgerIcon {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.hamburgerIcon::before,
+.hamburgerIcon::after {
+    content: '';
+    position: absolute;
+    background-color: #000;
+    height: 2px;
+    width: 20px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+}
+
+.hamburgerIcon::after {
+    top: auto;
+    bottom: 50%;
+}
+
+.navItemList.active {
+    display: block; /* Show the navigation items when the hamburger menu is active */
+}
+
+/* Media query for small screens (e.g., mobile phones) */
+@media screen and (max-width: 600px) {
+    .navItemList {
+        display: none; /* Hide the navigation items by default on small screens */
+    }
+
+    .hamburgerMenu {
+        display: block; /* Show the hamburger menu icon on small screens */
+    }
+
+    .navItemList.active {
+        display: block; /* Show the navigation items when the hamburger menu is active */
+    }
 }
