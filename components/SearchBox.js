@@ -1,8 +1,7 @@
 'use client'
 
 import styles from './SearchBox.module.css'
-import {router} from "next/client";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const SearchBox=() => {
     const router = useRouter();
