@@ -228,3 +228,16 @@
     transform: rotate(0deg);
   }
 }
+
+.searchBox {
+  margin: 0px 20px;
+  width: 60vw;
+}
+
+.centered {
+  text-align: center;
+}
+
+.onTop {
+  z-index: 999;
+}
