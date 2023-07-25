@@ -12,11 +12,27 @@
     grid-template-columns: repeat(1, minmax(100%, auto));
     width: var(--max-width);
     max-width: 100%;
+
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 4rem 0;
 }
 
 .card {
     display: flex;
     flex-direction: column;
+    padding: 1rem 1.2rem;
+    border-radius: var(--border-radius);
+    background: rgba(var(--card-rgb), 0);
+    border: 1px solid rgba(var(--card-border-rgb), 0);
+    transition: background 200ms, border 200ms;
+}
+
+.rowCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     padding: 1rem 1.2rem;
     border-radius: var(--border-radius);
     background: rgba(var(--card-rgb), 0);
@@ -151,4 +167,14 @@
 
 .questionBody {
     text-align: justify;
+}
+
+.faChevronRight {
+    width: 15px;
+    height: 15px;
+    justify-content: center;
+}
+
+.centered {
+
 }

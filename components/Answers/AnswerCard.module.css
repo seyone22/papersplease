@@ -4,8 +4,9 @@
     padding: 1rem 1.2rem;
     border-radius: var(--border-radius);
     background: rgba(var(--card-rgb), 0);
-    border: 1px solid rgba(var(--card-border-rgb), 0);
+    border: 2px solid rgba(var(--card-border-rgb), 100) !important;
     transition: background 200ms, border 200ms;
+    margin: 12px 4px;
 }
 
 .card span {
@@ -26,7 +27,20 @@
     max-width: 30ch;
 }
 
-
 .answerList {
     list-style: none;
+}
+
+/* For mobile devices with a maximum width of 767px (adjust as needed) */
+@media (max-width: 767px) {
+    .card {
+        width: 80vw;
+    }
+}
+
+/* For desktop devices with a minimum width of 768px (adjust as needed) */
+@media (min-width: 768px) {
+    .card {
+        width: 60vw;
+    }
 }

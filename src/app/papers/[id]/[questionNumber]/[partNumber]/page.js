@@ -14,7 +14,9 @@ export default async function QuestionDetail({params}) {
     return (
         <main className={styles.main}>
             <TopNav/>
-            {JSON.stringify(currentPaper.questions[params.questionNumber - 1].parts[params.partNumber.charCodeAt(0) - 97].questionBody)}
+            <div>
+                {JSON.stringify(currentPaper.questions[params.questionNumber - 1].parts[params.partNumber.charCodeAt(0) - 97].questionBody)}
+            </div>
             <div>
                 {
                     tmp.map((answer, answerIndex) => (
