@@ -30,9 +30,23 @@ export async function addPaper(req, res) {
         const paper = await Paper.create(req.body);
         console.log("CREATED DOCUMENT");
 
-        res.json({  paper });
+        res.json({paper});
     } catch (error) {
         console.log(error);
-        res.json({ error });
+        res.json({error});
+    }
+}
+
+export async function searchPaper(req, res) {
+    try {
+        console.log("CONNECTING TO MONGO");
+        await connectMongo();
+        console.log("CONNECTED TO MONGO");
+        let searchResult = await Paper.find({$text: {$search: req}});
+        console.log(searchResult);
+        return searchResult;
+    } catch (error) {
+        console.log(error);
+        return null;
     }
 }
