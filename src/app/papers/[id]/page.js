@@ -5,6 +5,7 @@ import { fetchPaperById } from 'utils/database'
 import TopNav from 'components/TopNav'
 import QuestionExpander from "../../../../components/QuestionExpander";
 import SearchBox from "../../../../components/SearchBox";
+import DownloadButton from "../../../../components/DownloadButton";
 export default async function PaperDetail({ params }) {
     let currentPaper = await getData(params.id);
 
@@ -15,6 +16,8 @@ export default async function PaperDetail({ params }) {
                 <h2>{currentPaper.paperYear}</h2>
                 <h1>{currentPaper.paperName}</h1>
             </div>
+
+            <DownloadButton />
 
             <div className={styles.grid}>
                 {currentPaper.questions.map((question, questionIndex) => (
