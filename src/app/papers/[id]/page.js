@@ -1,30 +1,38 @@
-import styles from '/src/app/page.module.css'
+import styles from './page.module.css'
 
 import { fetchPaperById } from 'utils/database'
 
 import TopNav from 'components/TopNav'
-
-export default async function PaperDetail({params}) {
-
-let currentPaper = await getData(params.id);
+import QuestionExpander from "../../../../components/QuestionExpander";
+import SearchBox from "../../../../components/SearchBox";
+export default async function PaperDetail({ params }) {
+    let currentPaper = await getData(params.id);
 
     return (
         <main className={styles.main}>
-
             <TopNav />
-
             <div className={styles.center}>
                 <h2>{currentPaper.paperYear}</h2>
                 <h1>{currentPaper.paperName}</h1>
-
-                <p>
-                    {currentPaper.questions[1].questionBody}
-                </p>
-
             </div>
- thi
+
+            <div className={styles.grid}>
+                {currentPaper.questions.map((question, questionIndex) => (
+                    <div className={styles.card} key={questionIndex}>
+                        <span className={styles.partNumber}>{question.questionNumber}. </span>
+
+                        {question.parts.map((part, partIndex) => (
+                            <div className={styles.card} key={partIndex}>
+                                <a href={`/papers/${currentPaper._id}/${question.questionNumber}/${part.partNumber}`}>
+                                    {part.partNumber}. {part.questionBody}
+                                </a>
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div>
         </main>
-    )
+    );
 }
 
 async function getData(id) {

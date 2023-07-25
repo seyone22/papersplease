@@ -1,7 +1,8 @@
 import { Schema, model, models } from 'mongoose';
 import {ObjectId} from "mongodb";
+import {enumToString} from "mongodb/src/utils";
 
-const questionSchema = new Schema({
+const subpartSchema = new Schema({
     questionNumber: {
         type: Number,
         required: true
@@ -21,12 +22,49 @@ const questionSchema = new Schema({
     marks: {
         type: Number,
         required: true
-    }
+    },
+})
+
+const partSchema = new Schema({
+    questionNumber: {
+        type: Number,
+        required: true
+    },
+    partNumber: {
+        type: String,
+        required: true
+    },
+    questionBody: {
+        type: String,
+        required: true
+    },
+    attachments: [String],
+    marks: {
+        type: Number,
+        required: true
+    },
+    subparts: [subpartSchema]
+})
+
+const questionSchema = new Schema({
+    questionNumber: {
+        type: Number,
+        required: true
+    },
+    parts: [partSchema]
 });
 
 const paperSchema = new Schema({
     _id: {
         type: ObjectId
+    },
+    entity: {
+        type: String,
+        required: false
+    },
+    examination: {
+        type: String,
+        required: false
     },
     paperYear: {
         type: Number,
@@ -43,6 +81,18 @@ const paperSchema = new Schema({
     courseYear: {
         type: String,
         required: true
+    },
+    courseSemester: {
+        type: Number,
+        required: false
+    },
+    time: {
+        type: Number,
+        required: false
+    },
+    instructions: {
+        type: String,
+        required: false
     },
     questions: [questionSchema]
 });
