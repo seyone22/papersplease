@@ -1,5 +1,5 @@
-import connectMongo from './connectMongo';
-import Paper from 'models/Paper.js';
+import connectMongo from '../connectMongo';
+import Paper from '../../models/Paper.js';
 
 export async function fetchPaperById(req) {
     console.log("CONNECTING TO MONGO");

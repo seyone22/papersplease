@@ -1,10 +1,9 @@
-import { NextResponse } from 'next/server'
+import {NextResponse} from 'next/server'
 import connectMongo from "../../../utils/connectMongo";
 import Paper from "../../../models/Paper";
-import { ObjectId } from 'mongodb';
 import mongoose from "mongoose";
 
-import { fetchPapers } from 'utils/database'
+import {fetchPapers} from '../../../utils/database/paperUtil'
 
 export async function POST(req) {
 

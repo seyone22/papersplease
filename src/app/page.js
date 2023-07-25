@@ -1,6 +1,6 @@
 import styles from './page.module.css'
 
-import { fetchPapers } from "../../utils/database";
+import {fetchPapers} from "../../utils/database/paperUtil";
 import TopNav from "../../components/TopNav";
 import SearchBox from "../../components/SearchBox";
 

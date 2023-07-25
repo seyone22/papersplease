@@ -1,11 +1,10 @@
 import styles from './page.module.css'
 
-import { fetchPaperById } from 'utils/database'
+import {fetchPaperById} from '../../../../utils/database/paperUtil'
 
 import TopNav from 'components/TopNav'
-import QuestionExpander from "../../../../components/QuestionExpander";
-import SearchBox from "../../../../components/SearchBox";
 import DownloadButton from "../../../../components/DownloadButton";
+
 export default async function PaperDetail({ params }) {
     let currentPaper = await getData(params.id);
 
