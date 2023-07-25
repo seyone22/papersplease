@@ -1,30 +1,27 @@
 // Importing the required module
-import { Schema, model } from 'mongoose';
+import { Schema, model, models } from 'mongoose';
 import { ObjectId } from 'mongodb';
 
-// Creating a new Mongoose schema for the answers collection
+// Creating a new Mongoose schema for the "answers" collection
 const answerSchema = new Schema({
-  // Reference to the Paper schema
-  paperId: {
+  // ObjectId of the question to which this answer belongs
+  questionId: {
     type: ObjectId,
-    ref: 'Paper', // The name of the Paper model to reference
     required: true,
   },
-  // Reference to the User schema
-  userId: {
-    type: ObjectId,
-    ref: 'User', // The name of the User model to reference
+  // Year of the paper to which this answer is related
+  paperYear: {
+    type: Number,
+    required: true,
+  },
+  // Name of the person who provided this answer
+  answeredBy: {
+    type: String,
     required: true,
   },
   // The actual text of the answer
   answerText: {
     type: String,
-    required: true,
-  },
-  // The user who created the answer
-  createdBy: {
-    type: ObjectId,
-    ref: 'User', // The name of the User model to reference
     required: true,
   },
   // Date and time when the answer was created (default: current date/time)
@@ -34,8 +31,11 @@ const answerSchema = new Schema({
   },
 });
 
-// Creating a model named "Answer" from the "answerSchema"
-const Answer = model('Answer', answerSchema);
+// Creating a model named "Answers" from the "answerSchema"
+const Answers = models.Answers || model('Answers', answerSchema);
 
-// Exporting the "Answer" model to be used in other parts of the application
-export default Answer;
+// Specifying the collection name as "answers" for the "Answers" model
+Answers.schema.set('collection', 'answers');
+
+// Exporting the "Answers" model to be used in other parts of the application
+export default Answers;

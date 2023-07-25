@@ -9,15 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.1.1",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.3.1",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
     "formik": "^2.4.2",
+    "jsonwebtoken": "^9.0.1",
     "mongodb": "^5.7.0",
     "mongodb-client-encryption": "^2.9.0",
     "mongoose": "^7.3.4",
-    "next": "13.4.9",
+    "next": "^13.4.9",
+    "prop-types": "^15.8.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.2",
+    "rxjs": "^7.8.1",
+    "yup": "^1.2.0"
   }
 }
