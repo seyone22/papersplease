@@ -1,0 +1,19 @@
+.downloadButton {
+    width: 200px;
+    height: 40px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    z-index: 99;
+}
+
+.downloadButton:hover {
+    background-color: #0056b3;
+}
+
+.downloadButton:active {
+    background-color: #004b99;
+}

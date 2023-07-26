@@ -1,6 +1,6 @@
 import styles from './page.module.css'
 
-import { fetchPapers } from "../../utils/database";
+import {fetchPapers} from "../../utils/database/paperUtil";
 import TopNav from "../../components/TopNav";
 import SearchBox from "../../components/SearchBox";
 
@@ -17,8 +17,9 @@ export default async function Home() {
 
             <h2 className={styles.centered}>Browse Examination Papers</h2>
             <div className={styles.searchBox}>
-                <SearchBox />
+                <SearchBox/>
             </div>
+            <h2 className={styles.centered}>All Papers</h2>
             <div className={styles.grid}>
                 {paperList.map(paper => (
                     <div key={paper.id} className={styles.card}>

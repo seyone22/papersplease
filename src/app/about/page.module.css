@@ -1,7 +1,7 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
@@ -79,7 +79,6 @@
   align-items: center;
   position: relative;
   padding: 4rem 0;
-  z-index: -1;
 }
 
 .center::before {
@@ -246,7 +245,6 @@
 }
 
 .centered {
-  margin: 16px 0px;
   text-align: center;
 }
 
