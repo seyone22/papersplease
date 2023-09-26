@@ -8,7 +8,7 @@ const QuestionExpander = ({ question }) => {
     const handleCardClick = () => {
         setIsExpanded(!isExpanded);
     };
-
+//TODO: Fix the question detail page.
     return (
         <div>
         {

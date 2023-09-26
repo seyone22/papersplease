@@ -1,10 +1,10 @@
 import styles from './page.module.css'
 import TopNav from "../../../components/TopNav";
-import {searchPaper} from "../../../utils/database/paperUtil";
 import SearchBox from "../../../components/SearchBox";
+import {searchQuestions} from "../../../utils/database/questionUtil";
 
 export default async function Home(req) {
-    let searchResult = await searchPaper(req.searchParams.query);
+    let searchResult = await searchQuestions(req.searchParams.query);
     console.log(searchResult);
     return (
         <main className={styles.main}>
@@ -12,8 +12,18 @@ export default async function Home(req) {
             <SearchBox/>
             <h1>Search Results</h1>
             {
-                searchResult
-            }asfds
+                <div>
+                    {
+                        searchResult.map((sr, searchResultIndex) => (
+                            <a key={searchResultIndex} href={`/exam/${sr.paperId}/${sr.id}`}>
+                                <div className={styles.card}>
+                                    <p>{sr.questionBody}</p>
+                                </div>
+                            </a>
+                        ))
+                    }
+                </div>
+            }
         </main>
     );
 }

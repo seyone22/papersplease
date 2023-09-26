@@ -1,0 +1,29 @@
+.TextInput {
+    border: none;
+    width: 100%;
+    height: 8em;
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+}
+
+.PostButton {
+    padding: 4px 8px;
+    margin: 10px 10px;
+    width: 100px;
+}
+
+.InputContainer {
+    width: 100%;
+    background-color: white;
+    border: solid 2px lightgrey;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.FormContainer {
+    width: 100%;
+}

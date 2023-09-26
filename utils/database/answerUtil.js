@@ -1,5 +1,5 @@
 import connectMongo from '../connectMongo';
-import Paper from '../../models/Paper.js';
+import Question from '../../models/Question.js';
 import Answer from "../../models/Answer";
 
 export async function fetchAnswersbyId(req) {
@@ -7,9 +7,7 @@ export async function fetchAnswersbyId(req) {
     await connectMongo();
     console.log("CONNECTED TO MONGO");
 
-    const answer = await Answer.findById(req).exec();
-
-    return answer;
+    return await Answer.findById(req).exec();
 }
 
 export async function fetchAllAnswers() {
@@ -17,17 +15,59 @@ export async function fetchAllAnswers() {
     await connectMongo();
     console.log("CONNECTED TO MONGO");
 
-    const answer = await Answer.find().exec();
-    return answer;
+    return await Answer.find().exec();
 }
 
-export async function fetchAnswersforQuestionbyId(_id, qnNo, ptNo) {
+export async function fetchAnswersforQuestionbyId(id) {
+    console.log(id);
     console.log("CONNECTING TO MONGO");
     await connectMongo();
     console.log("CONNECTED TO MONGO");
 
-    const answers = await Answer.find({paperId: _id, questionNumber: qnNo, partNumber: ptNo}).exec();
+    //TODO: Fix Aggregation Pipeline
+    const answers = await Answer.aggregate([{
+        $match: {
+            questionId: id,
+        },
+    }, {
+        $lookup: {
+            from: 'users', // Name of the "users" collection
+            localField: 'author', foreignField: '_id', as: 'author',
+        },
+    }, {
+        $unwind: '$author', // Unwind the array created by $lookup
+    }, {
+        $sort: {
+            updatedAt: -1, // Sort by the "createdAt" field in descending order (most recent first)
+        },
+    }, {
+        $project: {
+            answerBody: 1, // Include answer fields
+            updatedAt: 1,
+            'author.name': 1, // Include user's name
+        },
+    },]).exec();
+
+    console.log(answers);
     return answers;
+}
+
+
+export function postAnswer(formData) {
+    try {
+        let submissionData = {
+            author: formData.get('author'), answerBody: formData.get('answerBody')
+        };
+        const submission = Answer.create(submissionData, (error, newSubmission) => {
+            if (error) {
+                throw error;
+            } else {
+                console.log("Comment posted", newSubmission)
+            }
+        })
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 
@@ -39,7 +79,7 @@ export async function addTemp(req, res) {
         console.log("CONNECTED TO MONGO");
 
         console.log('CREATING DOCUMENT');
-        const paper = await Paper.create(req.body);
+        const paper = await Question.create(req.body);
         console.log("CREATED DOCUMENT");
 
         res.json({paper});

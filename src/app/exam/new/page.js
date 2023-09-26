@@ -1,9 +1,6 @@
 'use client'
-import { useState } from 'react';
 //DOES NOT WORK IN FIREFOX
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-
-import styles from './page.module.css'
+import {ErrorMessage, Field, Form, Formik} from 'formik';
 
 function FormPage() {
     return (
