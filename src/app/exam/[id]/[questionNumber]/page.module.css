@@ -110,7 +110,7 @@
 }
 
 .searchBox {
-  margin: 0px 20px;
+  margin: 0 20px;
   width: 40vw;
 }
 
@@ -220,7 +220,7 @@
   }
 
   .searchBox {
-    margin: 0px 20px;
+    margin: 0 20px;
     width: 60vw;
   }
 }
