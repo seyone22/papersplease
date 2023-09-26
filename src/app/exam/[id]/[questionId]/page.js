@@ -6,8 +6,10 @@ import {fetchAnswersforQuestionbyId} from "../../../../../utils/database/answerU
 import {fetchQuestionById} from "../../../../../utils/database/questionUtil";
 
 export default async function QuestionDetail({params}) {
-    let currentQuestion = await fetchQuestionById(params.questionNumber);
-    let tmp = await fetchAnswersforQuestionbyId(params.questionNumber);
+    let currentQuestion = await fetchQuestionById(params.questionId);
+    let tmp = await fetchAnswersforQuestionbyId(params.questionId);
+
+    console.log(tmp);
 
     return (
         <main className={styles.main}>
