@@ -7,35 +7,22 @@ const answerSchema = new Schema({
   _id: {
     type: ObjectId
   },
-  // Reference to the Paper schema
-  paperId: {
+  // Reference to the Question schema
+  questionId: {
     type: ObjectId,
-    ref: 'Paper', // The name of the Paper model to reference
+    ref: 'Question', // The name of the Question model to reference
     required: true,
   },
-  questionNumber: {
-    type: Number,
-    required: true
-  },
-  partNumber: {
-    type: String,
-    required: true
-  },
   // The actual text of the answer
-  answerText: {
+  answerBody: {
     type: String,
     required: true,
   },
   // The user who created the answer
-  createdBy: {
+  author: {
     type: ObjectId,
     ref: 'User', // The name of the User model to reference
     required: true,
-  },
-  // Date and time when the answer was created (default: current date/time)
-  createdAt: {
-    type: Date,
-    default: Date.now,
   },
   votePositive: {
     type: Number
@@ -49,10 +36,13 @@ const answerSchema = new Schema({
   superVotesNegative: {
     type: Number
   }
+}, {
+  timestamps: true
 });
 
 // Creating a model named "Answer" from the "answerSchema"
 const Answer = models.Answer || model('Answer', answerSchema);
+Answer.schema.set('collection', 'answers'); //Here's where the collection name is set!
 
 // Exporting the "Answer" model to be used in other parts of the application
 export default Answer;
