@@ -4,8 +4,7 @@ import SearchBox from "../../../components/SearchBox";
 import {searchQuestions} from "../../../utils/database/questionUtil";
 
 export default async function Home(req) {
-    let searchResult = await searchQuestions(req.searchParams.query);
-    console.log(searchResult);
+    let searchResult = await searchQuestions(req);
     return (
         <main className={styles.main}>
             <TopNav/>
@@ -17,6 +16,7 @@ export default async function Home(req) {
                         searchResult.map((sr, searchResultIndex) => (
                             <a key={searchResultIndex} href={`/exam/${sr.paperId}/${sr.id}`}>
                                 <div className={styles.card}>
+                                    <p></p>
                                     <p>{sr.questionBody}</p>
                                 </div>
                             </a>
