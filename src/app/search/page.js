@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import styles from './page.module.css'
 import TopNav from "../../../components/TopNav";
 import SearchBox from "../../../components/SearchBox";
