@@ -31,13 +31,14 @@ function timeAgo(timestamp) {
 
 const AnswerCard = ({answer}) => {
     const handleSubmit = async (e) => {
-        e.defaultPrevented();
+        e.preventDefault();
 
         let formData = new FormData(e.target);
         try {
             // TODO: DOES NOT SEND THE REQUEST
-            console.log(`/api?_id=${encodeURIComponent(FormData.get('_id'))}`);
-            const response = await fetch(`/api?_id=${encodeURIComponent(FormData.get('_id'))}`, {
+            let toDelete = formData.get('_id');
+            console.log(toDelete);
+            const response = await fetch(`/api?_id=${encodeURIComponent(formData.get('_id'))}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,7 +50,7 @@ const AnswerCard = ({answer}) => {
                 // Handle successful response here, if needed
                 console.log('Answer Deleted successfully');
                 // Reload the page
-                //window.location.reload();
+                window.location.reload();
             } else {
                 throw new Error('Failed to delete answer');
             }
@@ -67,7 +68,7 @@ const AnswerCard = ({answer}) => {
                 {/* Displaying 'Superuser Upvoted' if the answer was upvoted by a superuser */}
                 {answer.superVotesPositive && <p>Superuser Upvoted</p>}
                 <form onSubmit={handleSubmit}>
-                    <input type={"hidden"} id={"_id"} value={answer._id}/>
+                    <input type={"hidden"} name={"_id"} value={answer._id}/>
                     <button type={"submit"}>Delete</button>
                 </form>
             </li>
