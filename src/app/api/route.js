@@ -1,9 +1,10 @@
 import {NextResponse} from 'next/server'
 import connectMongo from "../../../utils/connectMongo";
-import Paper from "../../../models/Paper";
+import Question from "../../../models/Question";
 import mongoose from "mongoose";
 
-import {fetchPapers} from '../../../utils/database/paperUtil'
+import {fetchPapers} from '../../../utils/database/examUtil'
+import Answer from "../../../models/Answer";
 
 export async function POST(req) {
 
@@ -13,12 +14,13 @@ export async function POST(req) {
         console.log("CONNECTED TO MONGO");
 
         console.log('CREATING DOCUMENT');
-        let newPaper = await req.json();
-        const paper = await Paper.create(newPaper);
+        let newAnswer = await req.json();
+        newAnswer._id = new mongoose.Types.ObjectId();
+        const answer = await Answer.create(newAnswer);
         console.log("CREATED DOCUMENT");
 
-        console.log(newPaper);
-        return NextResponse.json({ newPaper })
+        console.log(newAnswer);
+        return NextResponse.json({newAnswer})
 
     } catch (error) {
         let message = error.message;
@@ -29,29 +31,16 @@ export async function POST(req) {
 
 export async function GET(req) {
     console.log(req.json());
-    if (false) {
-        try {
-            console.log('SEARCHING...');
-            const documents = await fetchPapers();
-            console.log("FOUND DOCUMENT!");
+    try {
+        console.log('SEARCHING...');
+        const documents = await fetchPapers();
+        console.log("FOUND DOCUMENT!");
 
-            return NextResponse.json({documents})
-        } catch (error) {
-            console.log(error);
-            return NextResponse.json({error});
-        }
-    } else {
-        try {
-            console.log('SEARCHING...');
-            const documents = await fetchPapers();
-            console.log("FOUND DOCUMENT!");
-
-            return NextResponse.json({documents})
-        } catch (error) {
-            let message = error.message;
-            console.log(error);
-            return NextResponse.json({ message });
-        }
+        return NextResponse.json({documents})
+    } catch (error) {
+        let message = error.message;
+        console.log(error);
+        return NextResponse.json({message});
     }
 }
 
@@ -72,10 +61,10 @@ export async function PUT(req) {
         }
 
         // Update the paper with the new data
-        const paper = await Paper.findByIdAndUpdate(paperId, updatedPaper, { new: true });
+        const paper = await Question.findByIdAndUpdate(paperId, updatedPaper, {new: true});
 
         if (!paper) {
-            throw new Error("Paper not found");
+            throw new Error("Question not found");
         }
 
         console.log("UPDATED PAPER");
@@ -95,15 +84,15 @@ export async function DELETE(req) {
         await connectMongo();
         console.log("CONNECTED TO MONGO");
 
-        const paperId = req.nextUrl.searchParams.get("id"); // Assuming you are passing the paper ID in the URL
-        const deletedPaper = await Paper.findByIdAndDelete(new mongoose.Types.ObjectId(paperId));
+        const answerId = req.nextUrl.searchParams.get("_id"); // Assuming you are passing the paper ID in the URL
+        const deletedAnswer = await Answer.findByIdAndDelete(new mongoose.Types.ObjectId(answerId));
 
-        if (!deletedPaper) {
-            throw new Error("Paper not found");
+        if (!deletedAnswer) {
+            throw new Error("Answer not found");
         }
 
-        console.log("DELETED PAPER");
-        return NextResponse.json({ deletedPaper });
+        console.log("DELETED ANSWER");
+        return NextResponse.json({deletedAnswer});
 
     } catch (error) {
         let message = error.message;

@@ -69,7 +69,6 @@
   opacity: 0.6;
   font-size: 0.9rem;
   line-height: 1.5;
-  max-width: 30ch;
 }
 
 .center {
@@ -110,7 +109,7 @@
 }
 
 .searchBox {
-  margin: 0px 20px;
+  margin: 0 20px;
   width: 40vw;
 }
 
@@ -220,7 +219,7 @@
   }
 
   .searchBox {
-    margin: 0px 20px;
+    margin: 0 20px;
     width: 60vw;
   }
 }
