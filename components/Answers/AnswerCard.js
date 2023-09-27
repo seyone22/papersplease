@@ -75,6 +75,6 @@ const AnswerCard = ({answer}) => {
         </div>
     );
 };
-//TODO: Implement editing
+//TODO: Implement editing :)
 
 export default AnswerCard;
