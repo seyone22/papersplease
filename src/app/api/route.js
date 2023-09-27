@@ -1,9 +1,9 @@
 import {NextResponse} from 'next/server'
-import connectMongo from "../../../utils/connectMongo";
-import Question from "../../../models/Question";
 import mongoose from "mongoose";
 
-import {fetchPapers} from '../../../utils/database/examUtil'
+import connectMongo from "../../../utils/connectMongo";
+
+import Question from "../../../models/Question";
 import Answer from "../../../models/Answer";
 
 export async function POST(req) {
