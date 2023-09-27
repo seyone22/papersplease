@@ -40,6 +40,10 @@ const examSchema = new Schema({
     instructions: {
         type: String,
         required: false
+    },
+    pdfLocation: {
+        type: String,
+        required: false
     }
 });
 

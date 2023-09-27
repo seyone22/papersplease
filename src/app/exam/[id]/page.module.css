@@ -27,6 +27,7 @@
     background: rgba(var(--card-rgb), 0);
     border: 1px solid rgba(var(--card-border-rgb), 0);
     transition: background 200ms, border 200ms;
+    text-align: justify;
 }
 
 .rowCard {
@@ -55,7 +56,6 @@
     opacity: 0.6;
     font-size: 0.9rem;
     line-height: 1.5;
-    max-width: 30ch;
 }
 
 .center {

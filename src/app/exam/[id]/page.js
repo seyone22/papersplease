@@ -16,7 +16,7 @@ export default async function ExamDetail({params}) {
                 <h1>{currentExam.paperName}</h1>
             </div>
 
-            <DownloadButton/>
+            <DownloadButton location={currentExam.pdfLocation}/>
 
             <div className={styles.grid}>
                 <div>
