@@ -1,6 +1,7 @@
 import connectMongo from '../connectMongo';
 import Question from '../../models/Question.js';
 import Answer from "../../models/Answer";
+import {ObjectId} from "mongodb";
 
 export async function fetchAnswersbyId(req) {
     console.log("CONNECTING TO MONGO");
@@ -24,10 +25,9 @@ export async function fetchAnswersforQuestionbyId(id) {
     await connectMongo();
     console.log("CONNECTED TO MONGO");
 
-    //TODO: Fix Aggregation Pipeline
     const answers = await Answer.aggregate([{
         $match: {
-            questionId: id,
+            questionId: new ObjectId(id),
         },
     }, {
         $lookup: {
