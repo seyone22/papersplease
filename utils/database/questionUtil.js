@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import connectMongo from '../connectMongo';
 import Question from "../../models/Question";
 
