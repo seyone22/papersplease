@@ -2,12 +2,13 @@
 import styles from './DiscussionInputBox.module.css'
 import {useState} from "react";
 
-const DiscussionInputBox = (questionId) => {
+const DiscussionInputBox = (params) => {
     const [answerBody, setAnswerBody] = useState(''); // Initialize the state with an empty string
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let formData = new FormData(e.target);
-        console.log(Object.fromEntries(formData));
+        let formDataObject = Object.fromEntries(new FormData(e.target));
+        formDataObject.questionId = params.questionId;
+        console.log(formDataObject);
 
         try {
             const response = await fetch('/api/answer', {
@@ -15,7 +16,7 @@ const DiscussionInputBox = (questionId) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(Object.fromEntries(formData)), // Convert FormData to a plain object
+                body: JSON.stringify(formDataObject), // Convert FormData to a plain object
             });
 
             if (response.ok) {
@@ -36,8 +37,7 @@ const DiscussionInputBox = (questionId) => {
         <div className={styles.FormContainer}>
             <form onSubmit={handleSubmit}>
                 <div className={styles.InputContainer}>
-                    <input type="hidden" name="author" value={questionId}/>
-                    <input type="hidden" name="questionId" value={`{ "$oid": "${questionId}" }`}/>
+                    <input type="hidden" name="author" value="651312489b1c6b9a5faba021"/>
                     <textarea name="answerBody" className={styles.TextInput}></textarea>
                     <button type="submit" className={styles.PostButton}>Post Answer</button>
                 </div>
