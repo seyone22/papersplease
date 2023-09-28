@@ -1,10 +1,8 @@
 import {NextResponse} from 'next/server'
 import mongoose from "mongoose";
 
-import connectMongo from "../../../utils/connectMongo";
-
-import Question from "../../../models/Question";
-import Answer from "../../../models/Answer";
+import connectMongo from "../../../../utils/connectMongo";
+import Answer from "../../../../models/Answer";
 
 export async function POST(req) {
 
@@ -25,7 +23,7 @@ export async function POST(req) {
     } catch (error) {
         let message = error.message;
         console.log(error);
-        return NextResponse.json({ message });
+        return NextResponse.json({message});
     }
 }
 
@@ -44,40 +42,7 @@ export async function GET(req) {
     }
 }
 
-export async function PUT(req) {
-    try {
-        console.log("CONNECTING TO MONGO");
-        await connectMongo();
-        console.log("CONNECTED TO MONGO");
-
-        console.log('UPDATING PAPER');
-
-        const paperId = req.nextUrl.searchParams.get("id"); // Assuming you are passing the exam ID in the URL
-        let updatedPaper = await req.json();
-
-        // Validate that updatedPaper has some data before proceeding with the update
-        if (!updatedPaper || Object.keys(updatedPaper).length === 0) {
-            throw new Error("Invalid request data");
-        }
-
-        // Update the exam with the new data
-        const paper = await Question.findByIdAndUpdate(paperId, updatedPaper, {new: true});
-
-        if (!paper) {
-            throw new Error("Question not found");
-        }
-
-        console.log("UPDATED PAPER");
-
-        return NextResponse.json({ updatedPaper });
-
-    } catch (error) {
-        let message = error.message;
-        console.log(error);
-        return NextResponse.json({ message });
-    }
-}
-
+// UNIMPLEMENTED
 export async function DELETE(req) {
     try {
         console.log("CONNECTING TO MONGO");
@@ -97,6 +62,6 @@ export async function DELETE(req) {
     } catch (error) {
         let message = error.message;
         console.log(error);
-        return NextResponse.json({ message });
+        return NextResponse.json({message});
     }
 }
