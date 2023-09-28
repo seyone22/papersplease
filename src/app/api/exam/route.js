@@ -1,67 +1,49 @@
-import {NextResponse} from 'next/server'
-import mongoose from "mongoose";
-
-import connectMongo from "../../../../utils/connectMongo";
-import Answer from "../../../../models/Answer";
+import {fetchExams, insertExam} from "../../../../utils/database/examUtil";
+import {insertQuestion} from "../../../../utils/database/questionUtil";
 
 export async function POST(req) {
+    let body = await req.json();
 
-    try {
-        console.log("CONNECTING TO MONGO");
-        await connectMongo();
-        console.log("CONNECTED TO MONGO");
+    const {
+        entity,
+        examination,
+        paperYear,
+        paperName,
+        paperCourseId,
+        time,
+        instructions,
+        courseYear,
+        pdfLocation,
+        ...rest
+    } = body;
+    const examDetails = {
+        entity,
+        examination,
+        paperYear,
+        paperName,
+        paperCourseId,
+        time,
+        instructions,
+        courseYear,
+        pdfLocation
+    };
+    const {questions} = rest;
 
-        console.log('CREATING DOCUMENT');
-        let newAnswer = await req.json();
-        newAnswer._id = new mongoose.Types.ObjectId();
-        const answer = await Answer.create(newAnswer);
-        console.log("CREATED DOCUMENT");
+    console.log('TESTINGJAJAJAJA', questions);
 
-        console.log(newAnswer);
-        return NextResponse.json({newAnswer})
-
-    } catch (error) {
-        let message = error.message;
-        console.log(error);
-        return NextResponse.json({message});
+    await insertExam(examDetails);
+    // TODO: Array processing does not work!
+    for (const question of questions) {
+        await insertQuestion(question);
     }
+
+    return 1;
 }
 
 export async function GET(req) {
-    console.log(req.json());
-    try {
-        console.log('SEARCHING...');
-        const documents = await fetchPapers();
-        console.log("FOUND DOCUMENT!");
-
-        return NextResponse.json({documents})
-    } catch (error) {
-        let message = error.message;
-        console.log(error);
-        return NextResponse.json({message});
-    }
+    return await fetchExams();
 }
 
-// UNIMPLEMENTED
 export async function DELETE(req) {
-    try {
-        console.log("CONNECTING TO MONGO");
-        await connectMongo();
-        console.log("CONNECTED TO MONGO");
 
-        const answerId = req.nextUrl.searchParams.get("_id"); // Assuming you are passing the exam ID in the URL
-        const deletedAnswer = await Answer.findByIdAndDelete(new mongoose.Types.ObjectId(answerId));
-
-        if (!deletedAnswer) {
-            throw new Error("Answer not found");
-        }
-
-        console.log("DELETED ANSWER");
-        return NextResponse.json({deletedAnswer});
-
-    } catch (error) {
-        let message = error.message;
-        console.log(error);
-        return NextResponse.json({message});
-    }
 }

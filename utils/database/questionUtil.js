@@ -1,6 +1,8 @@
-export const dynamic = "force-dynamic";
+import mongoose from "mongoose";
 import connectMongo from '../connectMongo';
 import Question from "../../models/Question";
+
+export const dynamic = "force-dynamic";
 
 // Fetch Questions
 export async function fetchQuestionById(req) {
@@ -40,7 +42,8 @@ export async function insertQuestion(req, res) {
         console.log("CONNECTED TO MONGO");
 
         console.log('CREATING DOCUMENT');
-        const question = await Question.create(req.body);
+        req._id = new mongoose.Types.ObjectId();
+        const question = await Question.create(req);
         console.log("CREATED DOCUMENT");
 
         res.json({question});

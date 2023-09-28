@@ -7,9 +7,31 @@ function PaperEntryForm() {
     const {handleSubmit, control, register, setValue, getValues, watch} = useForm();
     const {fields, append, remove} = useFieldArray({control, name: 'questions'});
 
-    const onSubmit = (data) => {
-        // Handle form submission, data contains all form values
-        console.log(data);
+    const onSubmit = async (data) => {
+        try {
+            data.courseYear = data.paperCourseId[data.paperCourseId.length - 3];
+            data.pdfLocation = '/pdfs/' + data.paperCourseId;
+
+            const response = await fetch('/api/exam', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                // Handle successful response here, if needed
+                console.log('Answer posted successfully');
+                //setAnswerBody('');
+                // Reload the page
+                window.location.reload();
+            } else {
+                throw new Error('Failed to post answer');
+            }
+        } catch (error) {
+            console.error('Error posting answer:', error);
+        }
     };
 
     return (<div>
@@ -22,12 +44,12 @@ function PaperEntryForm() {
 
                 <div className={styles.formSection}>
                     <label>Examination Name:</label>
-                    <input type="text" {...register('examinationName')} />
+                    <input type="text" {...register('examination')} />
                 </div>
 
                 <div className={styles.formSection}>
                     <label>Year:</label>
-                    <input type="number" {...register('year')} />
+                    <input type="number" {...register('paperYear')} />
                 </div>
 
                 <div className={styles.formSection}>
@@ -37,12 +59,12 @@ function PaperEntryForm() {
 
                 <div className={styles.formSection}>
                     <label>Course ID:</label>
-                    <input type="text" {...register('courseId')} />
+                    <input type="text" {...register('paperCourseId')} />
                 </div>
 
                 <div className={styles.formSection}>
                     <label>Time Given:</label>
-                    <input type="number" {...register('timeGiven')} />
+                    <input type="number" {...register('time')} />
                 </div>
 
                 <div className={styles.formSection}>
@@ -54,6 +76,7 @@ function PaperEntryForm() {
                     <label>PDF File (Upload):</label>
                     <input type="file" {...register('pdfFile')} />
                 </div>
+
             </div>
 
             {fields.map((question, index) => (<div class={styles.questionBlock} key={question.id}>
