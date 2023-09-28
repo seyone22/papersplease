@@ -41,10 +41,10 @@ export async function insertQuestion(req, res) {
         await connectMongo();
         console.log("CONNECTED TO MONGO");
 
-        console.log('CREATING DOCUMENT');
+        console.log('CREATING QUESTION');
         req._id = new mongoose.Types.ObjectId();
         const question = await Question.create(req);
-        console.log("CREATED DOCUMENT");
+        console.log("CREATED QUESTION");
 
         res.json({question});
     } catch (error) {

@@ -1,7 +1,6 @@
 import connectMongo from '../connectMongo';
 import Exam from "../../models/Exam";
 import Question from "../../models/Question";
-import mongoose from "mongoose";
 
 // Fetch Exam details
 export async function fetchExamById(req) {
@@ -27,20 +26,13 @@ export async function insertExam(req, res) {
         await connectMongo();
         console.log("CONNECTED TO MONGO");
 
-        console.log('CREATING DOCUMENT');
-        req._id = new mongoose.Types.ObjectId();
+        console.log('CREATING EXAMINATION DETAIL');
         const exam = await Exam.create(req);
-        console.log("CREATED DOCUMENT");
-        ``
-
-        console.log(req)
-
-        res.json({exam});
+        console.log("CREATED EXAMINATION DETAIL");
 
         return exam;
     } catch (error) {
         console.log(error);
-        res.json({error});
     }
 }
 

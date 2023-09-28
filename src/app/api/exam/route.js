@@ -1,5 +1,6 @@
 import {fetchExams, insertExam} from "../../../../utils/database/examUtil";
 import {insertQuestion} from "../../../../utils/database/questionUtil";
+import mongoose from "mongoose";
 
 export async function POST(req) {
     let body = await req.json();
@@ -27,14 +28,20 @@ export async function POST(req) {
         courseYear,
         pdfLocation
     };
+    examDetails._id = new mongoose.Types.ObjectId();
     const {questions} = rest;
 
-    console.log('TESTINGJAJAJAJA', questions);
 
     await insertExam(examDetails);
     // TODO: Array processing does not work!
     for (const question of questions) {
-        await insertQuestion(question);
+        try {
+            question.paperId = examDetails._id;
+            console.log('TO ENTER', question);
+            await insertQuestion(question);
+        } catch (error) {
+            console.error('ERROR', error);
+        }
     }
 
     return 1;
