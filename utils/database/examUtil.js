@@ -1,6 +1,8 @@
 import connectMongo from '../connectMongo';
 import Exam from "../../models/Exam";
+import Question from "../../models/Question";
 
+// Fetch Exam details
 export async function fetchExamById(req) {
     console.log("CONNECTING TO MONGO");
     await connectMongo();
@@ -17,7 +19,8 @@ export async function fetchExams() {
     return await Exam.find().exec();
 }
 
-export async function addexam(req, res) {
+// Insert Exams
+export async function insertExam(req, res) {
     try {
         console.log("CONNECTING TO MONGO");
         await connectMongo();
@@ -34,7 +37,8 @@ export async function addexam(req, res) {
     }
 }
 
-export async function searchexam(req, res) {
+// Search Exams
+export async function searchExams(req, res) {
     try {
         console.log("CONNECTING TO MONGO");
         await connectMongo();

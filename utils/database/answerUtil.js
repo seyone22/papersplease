@@ -1,8 +1,11 @@
-import connectMongo from '../connectMongo';
-import Question from '../../models/Question.js';
-import Answer from "../../models/Answer";
 import {ObjectId} from "mongodb";
+import mongoose from "mongoose";
+import {NextResponse} from "next/server";
 
+import connectMongo from '../connectMongo';
+import Answer from "../../models/Answer";
+
+// Fetch answers
 export async function fetchAnswersbyId(req) {
     console.log("CONNECTING TO MONGO");
     await connectMongo();
@@ -52,39 +55,49 @@ export async function fetchAnswersforQuestionbyId(id) {
     return answers;
 }
 
-
-export function postAnswer(formData) {
-    try {
-        let submissionData = {
-            author: formData.get('author'), answerBody: formData.get('answerBody')
-        };
-        const submission = Answer.create(submissionData, (error, newSubmission) => {
-            if (error) {
-                throw error;
-            } else {
-                console.log("Comment posted", newSubmission)
-            }
-        })
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-
-//TRASH, NEED TO REPLACE
-export async function addTemp(req, res) {
+// Insert Answers
+export async function insertAnswer(req) {
     try {
         console.log("CONNECTING TO MONGO");
         await connectMongo();
         console.log("CONNECTED TO MONGO");
 
         console.log('CREATING DOCUMENT');
-        const paper = await Question.create(req.body);
+        let newAnswer = await req.json();
+        newAnswer._id = new mongoose.Types.ObjectId();
+        const answer = await Answer.create(newAnswer);
         console.log("CREATED DOCUMENT");
 
-        res.json({paper});
+        console.log(newAnswer);
+        return NextResponse.json({newAnswer})
+
     } catch (error) {
+        let message = error.message;
         console.log(error);
-        res.json({error});
+        return NextResponse.json({message});
+    }
+}
+
+// Delete Answers
+export async function deleteAnswer(req) {
+    try {
+        console.log("CONNECTING TO MONGO");
+        await connectMongo();
+        console.log("CONNECTED TO MONGO");
+
+        const answerId = req.nextUrl.searchParams.get("_id"); // Assuming you are passing the exam ID in the URL
+        const deletedAnswer = await Answer.findByIdAndDelete(new mongoose.Types.ObjectId(answerId));
+
+        if (!deletedAnswer) {
+            throw new Error("Answer not found");
+        }
+
+        console.log("DELETED ANSWER");
+        return NextResponse.json({deletedAnswer});
+
+    } catch (error) {
+        let message = error.message;
+        console.log(error);
+        return NextResponse.json({message});
     }
 }

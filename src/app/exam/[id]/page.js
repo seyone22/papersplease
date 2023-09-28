@@ -3,7 +3,7 @@ import styles from './page.module.css'
 import {fetchExamById} from '../../../../utils/database/examUtil'
 import TopNav from 'components/TopNav'
 import DownloadButton from "../../../../components/DownloadButton";
-import {findQuestionsFromPaper} from "../../../../utils/database/questionUtil";
+import {fetchQuestionsbyPaperId} from "../../../../utils/database/questionUtil";
 
 export default async function ExamDetail({params}) {
     let currentExam = await getExam(params.id);
@@ -40,5 +40,5 @@ async function getExam(id) {
 }
 
 async function getQuestions(id) {
-    return await findQuestionsFromPaper(id);
+    return await fetchQuestionsbyPaperId(id);
 }

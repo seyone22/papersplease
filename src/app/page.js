@@ -39,5 +39,3 @@ export default async function Home() {
 async function getData() {
     return await fetchExams();
 }
-
-//test

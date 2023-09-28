@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 import connectMongo from '../connectMongo';
 import Question from "../../models/Question";
 
+// Fetch Questions
 export async function fetchQuestionById(req) {
     console.log(req);
     console.log("CONNECTING TO MONGO");
@@ -10,7 +11,7 @@ export async function fetchQuestionById(req) {
     return await Question.findById(req).exec();
 }
 
-export async function fetchquestions() {
+export async function fetchQuestions() {
     console.log("CONNECTING TO MONGO");
     await connectMongo();
     console.log("CONNECTED TO MONGO");
@@ -18,7 +19,21 @@ export async function fetchquestions() {
     return await Question.find().exec();
 }
 
-export async function addquestion(req, res) {
+export async function fetchQuestionsbyPaperId(req, res) {
+    try {
+
+        console.log("CONNECTING TO MONGO");
+        await connectMongo();
+        console.log("CONNECTED TO MONGO");
+        return await Question.find({paperId: req}).exec();
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
+
+// Insert Questions
+export async function insertQuestion(req, res) {
     try {
         console.log("CONNECTING TO MONGO");
         await connectMongo();
@@ -35,6 +50,7 @@ export async function addquestion(req, res) {
     }
 }
 
+// Search Questions
 export async function searchQuestions(req, res) {
     try {
         console.log("CONNECTING TO MONGO");
@@ -77,15 +93,3 @@ export async function searchQuestions(req, res) {
     }
 }
 
-export async function findQuestionsFromPaper(req, res) {
-    try {
-
-        console.log("CONNECTING TO MONGO");
-        await connectMongo();
-        console.log("CONNECTED TO MONGO");
-        return await Question.find({paperId: req}).exec();
-    } catch (error) {
-        console.log(error);
-        return null;
-    }
-}
