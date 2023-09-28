@@ -2,7 +2,7 @@
 import styles from './DiscussionInputBox.module.css'
 import {useState} from "react";
 
-const DiscussionInputBox = () => {
+const DiscussionInputBox = (questionId) => {
     const [answerBody, setAnswerBody] = useState(''); // Initialize the state with an empty string
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,7 +35,7 @@ const DiscussionInputBox = () => {
         <div className={styles.FormContainer}>
             <form onSubmit={handleSubmit}>
                 <div className={styles.InputContainer}>
-                    <input type="hidden" name="author" value="651312489b1c6b9a5faba021"/>
+                    <input type="hidden" name="author" value={questionId}/>
                     <input type="hidden" name="questionId" value="6512b9872d4dcdca789a98d6"/>
                     <textarea name="answerBody" className={styles.TextInput}></textarea>
                     <button type="submit" className={styles.PostButton}>Post Answer</button>

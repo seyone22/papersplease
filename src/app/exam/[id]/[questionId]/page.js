@@ -17,7 +17,7 @@ export default async function QuestionDetail({params}) {
             <div>
                 {JSON.stringify(currentQuestion.questionBody)}
             </div>
-            <DiscussionInputBox/>
+            <DiscussionInputBox questionId={params.questionId}/>
             <div>
                 {
                     tmp.map((answer, answerIndex) => (
