@@ -111,3 +111,22 @@ a {
     color-scheme: dark;
   }
 }
+
+div.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 6rem;
+  min-height: 100vh;
+}
+
+input {
+  padding: 4px 10px;
+  margin: 4px 0;
+}
+
+textarea {
+  height: 10em;
+  padding: 10px;
+}

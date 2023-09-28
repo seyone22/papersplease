@@ -11,7 +11,7 @@ export default async function Home() {
         <main className={styles.main}>
             <TopNav/>
             <div className={styles.center}>
-                <h1 className={styles.onTop}>Exams Please!</h1>
+                <h1 className={styles.onTop}>Papers Please!</h1>
                 <h4 className={styles.onTop}>Abandon all hope, All ye who enter.</h4>
             </div>
 

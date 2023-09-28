@@ -23,7 +23,7 @@ const TopNav = () => {
                     <Link href="/">Home</Link>
                 </li>
                 <li className={styles.navItem}>
-                    <Link href="/papers/new">Contribute</Link>
+                    <Link href="/contribute">Contribute</Link>
                 </li>
                 <li className={styles.navItem}>
                     <Link href="/all">Papers</Link>

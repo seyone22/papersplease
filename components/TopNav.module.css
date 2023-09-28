@@ -42,7 +42,7 @@
 .hamburgerIcon::after {
     content: '';
     position: absolute;
-    background-color: #000;
+    background-color: rgb(var(--foreground-rgb));
     height: 2px;
     width: 20px;
     top: 50%;

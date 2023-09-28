@@ -1,0 +1,31 @@
+.formSection {
+    display: flex;
+    flex-direction: column;
+}
+
+.formButton {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.questionBlock {
+    border: 1px rgb(var(--foreground-rgb)) solid;
+    border-radius: var(--border-radius);
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.examBlock {
+    border: 1px rgb(var(--foreground-rgb)) solid;
+    border-radius: var(--border-radius);
+    padding: 10px;
+}
+
+
+/* Mobile */
+@media (max-width: 700px) {
+}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 701px) and (max-width: 1120px) {
+}
