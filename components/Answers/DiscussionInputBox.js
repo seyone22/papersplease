@@ -8,7 +8,6 @@ const DiscussionInputBox = (params) => {
         e.preventDefault();
         let formDataObject = Object.fromEntries(new FormData(e.target));
         formDataObject.questionId = params.questionId;
-        console.log(formDataObject);
 
         try {
             const response = await fetch('/api/answer', {

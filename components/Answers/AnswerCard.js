@@ -38,7 +38,7 @@ const AnswerCard = ({answer}) => {
             // TODO: DOES NOT SEND THE REQUEST
             let toDelete = formData.get('_id');
             console.log(toDelete);
-            const response = await fetch(`/api?_id=${encodeURIComponent(formData.get('_id'))}`, {
+            const response = await fetch(`/api/answer?_id=${encodeURIComponent(toDelete)}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
