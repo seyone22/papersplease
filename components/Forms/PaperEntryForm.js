@@ -34,8 +34,8 @@ function PaperEntryForm() {
         }
     };
 
-    return (<div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+    return (
+        <form className={styles.entryForm} onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.examBlock}>
                 <div className={styles.formSection}>
                     <label>Entity:</label>
@@ -127,7 +127,7 @@ function PaperEntryForm() {
             <button className={styles.formButton} type="reset">Clear</button>
             <button className={styles.formButton} type="submit">Submit</button>
         </form>
-    </div>);
+    );
 }
 
 export default PaperEntryForm;
