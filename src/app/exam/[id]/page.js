@@ -7,9 +7,29 @@ import {fetchQuestionsbyPaperId} from "../../../../utils/database/questionUtil";
 
 export default async function ExamDetail({params}) {
     let currentExam = await getExam(params.id);
-    let currentQuestions = await getQuestions(params.id);
+    const currentQuestions = await getQuestions(params.id); // Assuming currentQuestions is an array of objects with a 'questionNumber' property
+
+    // Create an object to store grouped questions
+    const groupedQuestions = [];
+
+    // Loop through the currentQuestions array and group by 'questionNumber'
+    currentQuestions.forEach(question => {
+        const {questionNumber} = question;
+
+        if (!groupedQuestions[questionNumber]) {
+            // If the key doesn't exist in the groupedQuestions object, create it and initialize it with an array
+            groupedQuestions[questionNumber] = [];
+        }
+
+        // Push the question into the corresponding array based on 'questionNumber'
+        groupedQuestions[questionNumber].push(question);
+    });
+
+    // Now, 'groupedQuestions' contains the values grouped by 'questionNumber'
+    console.log(groupedQuestions);
+
     return (
-        <main className={styles.main}>
+        <main>
             <TopNav/>
             <div className={styles.center}>
                 <h2>{currentExam.paperYear}</h2>
@@ -18,18 +38,31 @@ export default async function ExamDetail({params}) {
 
             <DownloadButton location={currentExam.pdfLocation}/>
 
-            <div className={styles.grid}>
-                <div>
-                    {
-                        currentQuestions.map((cq, currentQuestionsIndex) => (
-                            <a key={currentQuestionsIndex} href={`/exam/${currentExam.id}/${cq.id}`}>
-                                <div className={styles.card}>
-                                    <p>{cq.questionBody}</p>
-                                </div>
-                            </a>
-                        ))
-                    }
-                </div>
+            <div className={styles.questionList}>
+                {
+                    /*                    currentQuestions.map((cq, currentQuestionsIndex) => (
+                                            <a className={styles.questionListItem} key={currentQuestionsIndex}
+                                               href={`/exam/${currentExam.id}/${cq.id}`}>
+                                                <div className={styles.card}>
+                                                    <p>{cq.questionBody}</p>
+                                                </div>
+                                            </a>
+                                        ))*/
+
+                    groupedQuestions.map((questionGroup, questionGroupNumber) => (
+                        <div key={questionGroupNumber}>
+                            {questionGroupNumber}
+                            {
+                                questionGroup.map((qn, qnId) => (
+                                    <a href={`/exam/${currentExam.id}/${qn.id}`} key={qn} className={styles.card}>
+                                        <p> {qn.questionBody} </p>
+                                    </a>
+                                ))
+                            }
+                        </div>
+                    ))
+
+                }
             </div>
         </main>
     );
