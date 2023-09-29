@@ -31,3 +31,7 @@
     border: none;
     background-color: transparent;
 }
+
+.searchIcon {
+    stroke: rgb(var(--foreground-rgb));
+}
