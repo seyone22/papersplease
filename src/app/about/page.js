@@ -18,8 +18,9 @@ const About = () => {
                 <div className={styles.textBody}>
                     <h1>About Papers, Please!</h1>
                     <p>
-                        The University of Vavuniya Exam Hub is a platform dedicated to storing, retrieving, viewing, and
-                        updating past paper questions and answers. It is designed and developed by 2nd-year IT students.
+                        Papers please is where you can find a listing of all examination papers from the University of
+                        Vavuniya. You can also find their answers :).
+                        This was made as a part of our second year IT2244 coursework. It's a miracle it works!
                     </p>
                     <h2>Creators</h2>
                     <div className={styles.cardContainer}>

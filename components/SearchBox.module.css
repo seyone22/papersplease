@@ -20,18 +20,22 @@
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Change the shadow to your desired focus effect */
 }
 .searchIcon {
+    height: auto !important;
     position: relative;
+    top: 10px;
     left: 4px; /* Adjust this value to control the icon's horizontal position */
-    transform: translateY(115%);
     pointer-events: none; /* This prevents the icon from interfering with input events */
 }
 
 .searchButton {
-    z-index: 9999;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+
     border: none;
     background-color: transparent;
 }
 
-.searchIcon {
-    stroke: rgb(var(--foreground-rgb));
+.searchButton:hover {
+    cursor: pointer;
 }
