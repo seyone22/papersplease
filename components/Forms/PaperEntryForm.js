@@ -125,7 +125,7 @@ function PaperEntryForm() {
             </button>
 
             <button className={styles.formButton} type="reset">Clear</button>
-            <button className={styles.formButton} type="submit">Submit</button>
+            <button className={styles.action} type="submit">Submit</button>
         </form>
     );
 }

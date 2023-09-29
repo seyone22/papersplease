@@ -6,14 +6,30 @@
 .formButton {
     width: 100%;
     margin: 10px 0;
+    padding: 8px;
+
 }
 
 .delete {
     background-color: red;
+    padding: 8px;
+    color: white;
+    width: 120px;
 }
 
 .delete:hover {
     background-color: #940000;
+}
+
+.action {
+    background-color: #0082ff;
+    padding: 8px;
+    color: white;
+    width: 100%;
+}
+
+.action:hover {
+    background-color: #004f96;
 }
 
 .questionBlock {

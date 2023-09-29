@@ -25,7 +25,7 @@ function timeAgo(timestamp) {
     } else if (minutes > 0) {
         return minutes === 1 ? '1 minute ago' : `${minutes} minutes ago`;
     } else {
-        return seconds === 1 ? '1 second ago' : `${seconds} seconds ago`;
+        return 'just now';
     }
 }
 

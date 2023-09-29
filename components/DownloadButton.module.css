@@ -1,0 +1,16 @@
+/* CSS for styling buttons */
+.downloadButton {
+    width: 200px;
+    height: 40px;
+    background-color: #0082ff;
+    color: white;
+    z-index: 1;
+}
+
+.downloadButton:hover {
+    background-color: #0056b3;
+}
+
+.downloadButton:active {
+    background-color: #004b99;
+}
