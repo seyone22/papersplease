@@ -8,6 +8,14 @@
     margin: 10px 0;
 }
 
+.delete {
+    background-color: red;
+}
+
+.delete:hover {
+    background-color: #940000;
+}
+
 .questionBlock {
     border: 1px rgb(var(--foreground-rgb)) solid;
     border-radius: var(--border-radius);

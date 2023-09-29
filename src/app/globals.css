@@ -160,3 +160,24 @@ p {
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
 }
+
+/* CSS for styling buttons */
+button {
+    width: 200px;
+    height: 40px;
+    border: none;
+    background-color: #60b1ff;
+    color: white;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    z-index: 99;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:active {
+    background-color: #004b99;
+}

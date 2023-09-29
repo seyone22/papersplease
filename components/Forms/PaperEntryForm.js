@@ -109,7 +109,7 @@ function PaperEntryForm() {
                     <input type="number" {...register(`questions.${index}.marks`)} />
                 </div>
 
-                <button className={styles.formButton} type="button" onClick={() => remove(index)}>
+                <button className={styles.delete} type="button" onClick={() => remove(index)}>
                     Delete
                 </button>
             </div>))}
