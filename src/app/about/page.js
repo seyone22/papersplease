@@ -20,7 +20,7 @@ const About = () => {
                     <p>
                         Papers please is where you can find a listing of all examination papers from the University of
                         Vavuniya. You can also find their answers :).
-                        This was made as a part of our second year IT2244 coursework. It's a miracle it works!
+                        This was made as a part of our second year IT2244 coursework. It&aposs a miracle it works!
                     </p>
                     <h2>Creators</h2>
                     <div className={styles.cardContainer}>
