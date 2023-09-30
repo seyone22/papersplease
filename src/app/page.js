@@ -3,12 +3,22 @@ import styles from './page.module.css'
 import {fetchExams} from "../../utils/database/examUtil";
 import TopNav from "../../components/TopNav";
 import SearchBox from "../../components/SearchBox";
+import {headers} from "next/headers";
+import ProviderWrapper from "@/app/ProviderWrapper";
+import {getSession} from "next-auth/react";
+
+async function currentSession(cookie) {
+    const session = getSession()
+    return Object.keys(session).length > 0 ? session : null;
+}
 
 export default async function Home() {
+    const session = await currentSession(headers().get('cookie') ?? '');
+
     let examList = await getData();
 
     return (
-        <div>
+        <ProviderWrapper>
             <TopNav/>
             <main>
                 <div className={styles.center}>
@@ -33,7 +43,7 @@ export default async function Home() {
                     ))}
                 </div>
             </main>
-        </div>
+        </ProviderWrapper>
     );
 }
 

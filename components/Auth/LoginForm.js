@@ -1,38 +1,37 @@
-'use client'
-import {signIn} from 'next-auth/react';
+"use client";
+import Image from "next/image";
+import {signIn, signOut, useSession} from "next-auth/react";
 
-export default function Login() {
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const credentials = {
-            username: e.target.username.value,
-            password: e.target.password.value,
-        };
-
-        const result = await signIn('credentials', {...credentials, redirect: false});
-        if (result?.error) {
-            console.log(result);
-        } else {
-            // Redirect the user to the desired page
-        }
-    };
-
+const LoginForm = () => {
+    const {data: session} = useSession();
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Username:
-                    <input type="text" name="username" required/>
-                </label>
-                <br/>
-                <label>
-                    Password:
-                    <input type="password" name="password" required/>
-                </label>
-                <br/>
-                <button type="submit">Login</button>
-            </form>
+        <div className="flex flex-col items-center justify-center h-screen">
+            {console.log(session?.user.image)}
+            {session && (
+                <>
+                    <Image src={session.user.image} alt="img" width={50} height={50}/>
+                    <p>{session.user.name}</p>
+                    <p>{session.user.email}</p>
+                </>
+            )}
+            {!session && (
+                <button
+                    onClick={() => signIn()}
+                    className="p-2 my-2 bg-blue-500 text-white"
+                >
+                    Signin with google
+                </button>
+            )}
+            {session && (
+                <button
+                    onClick={() => signOut()}
+                    className="p-2 bg-blue-500 my-2 text-white"
+                >
+                    Sign out
+                </button>
+            )}
         </div>
     );
-}
+};
+
+export default LoginForm;

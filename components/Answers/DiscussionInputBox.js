@@ -40,7 +40,7 @@ const DiscussionInputBox = (params) => {
 
 
     }
-//TODO: Integrate simmplemde into this
+
     return (
         <div className={styles.FormContainer}>
             <form onSubmit={handleSubmit}>

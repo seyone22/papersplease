@@ -7,6 +7,7 @@ import {fetchQuestionById} from "../../../../../utils/database/questionUtil";
 import {unified} from "unified";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
+import remarkGfm from 'remark-gfm'
 import rehypeSanitize from "rehype-sanitize";
 import rehypeStringify from "rehype-stringify";
 
@@ -17,6 +18,7 @@ export default async function QuestionDetail({params}) {
     for (const answer of tmp) {
         answer.answerBody = await unified()
             .use(remarkParse)
+            .use(remarkGfm) // Support GFM (tables, autolinks, tasklists, strikethrough).
             .use(remarkRehype)
             .use(rehypeSanitize)
             .use(rehypeStringify)
