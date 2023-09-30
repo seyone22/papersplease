@@ -1,20 +1,28 @@
 'use client'
 import styles from './DiscussionInputBox.module.css'
 import {useState} from "react";
+import MDEditor from '@uiw/react-md-editor'
+import rehypeSanitize from "rehype-sanitize";
 
-const DiscussionInputBox = () => {
+const DiscussionInputBox = (params) => {
     const [answerBody, setAnswerBody] = useState(''); // Initialize the state with an empty string
+
+    const data = {
+        answerBody: answerBody,
+        author: "651312489b1c6b9a5faba021",
+        questionId: params.questionId
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let formData = new FormData(e.target);
 
         try {
-            const response = await fetch('/api/', {
+            const response = await fetch('/api/answer', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(Object.fromEntries(formData)), // Convert FormData to a plain object
+                body: JSON.stringify(data), // Convert FormData to a plain object
             });
 
             if (response.ok) {
@@ -29,15 +37,24 @@ const DiscussionInputBox = () => {
         } catch (error) {
             console.error('Error posting answer:', error);
         }
-    }
 
+
+    }
+//TODO: Integrate simmplemde into this
     return (
         <div className={styles.FormContainer}>
             <form onSubmit={handleSubmit}>
                 <div className={styles.InputContainer}>
-                    <input type="hidden" name="author" value="651312489b1c6b9a5faba021"/>
-                    <input type="hidden" name="questionId" value="6512b9872d4dcdca789a98d6"/>
-                    <textarea name="answerBody" className={styles.TextInput}></textarea>
+                    <MDEditor
+                        className={styles.MDEditor}
+                        value={answerBody}
+                        onChange={setAnswerBody}
+                        preview={"live"}
+                        previewOptions={{
+                            rehypePlugins: [[rehypeSanitize]],
+                        }}
+
+                    />
                     <button type="submit" className={styles.PostButton}>Post Answer</button>
                 </div>
             </form>

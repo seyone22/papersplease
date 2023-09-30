@@ -2,9 +2,8 @@
     display: flex;
     flex-direction: column;
     padding: 1rem 1.2rem;
-    border-radius: var(--border-radius);
+    border-radius: 10px;
     background: rgba(var(--card-rgb), 0);
-    border: 2px solid rgba(var(--card-border-rgb), 100) !important;
     transition: background 200ms, border 200ms;
     margin: 12px 4px;
 }
@@ -19,16 +18,49 @@
     margin-bottom: 0.7rem;
 }
 
-.card p {
+.updatedAt {
+    font-size: 0.9em;
+    color: grey;
+}
+
+.voteIcon {
+    padding: 0 6px;
+}
+
+.cardHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: space-between;
+}
+
+.cardBody {
+    margin-top: 4px !important;
+
     margin: 0;
     opacity: 0.6;
     font-size: 0.9rem;
     line-height: 1.5;
+    max-width: 100%;
 }
 
-.answerList {
-    list-style: none;
+.actionBar {
+    display: flex;
+    flex-direction: row;
+
+    margin-top: 8px;
 }
+
+.actionBarButton {
+    padding: 2px 8px;
+    border-radius: 6px;
+    background-color: transparent;
+}
+
+.actionBarButton:hover {
+    background-color: lightgrey;
+}
+
 
 /* For mobile devices with a maximum width of 767px (adjust as needed) */
 @media (max-width: 767px) {

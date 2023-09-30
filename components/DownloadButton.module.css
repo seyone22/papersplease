@@ -1,13 +1,10 @@
+/* CSS for styling buttons */
 .downloadButton {
     width: 200px;
     height: 40px;
-    border: none;
-    background-color: #007bff;
+    background-color: #0082ff;
     color: white;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    z-index: 99;
+    z-index: 1;
 }
 
 .downloadButton:hover {

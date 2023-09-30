@@ -1,6 +1,8 @@
 import connectMongo from '../connectMongo';
 import Exam from "../../models/Exam";
+import Question from "../../models/Question";
 
+// Fetch Exam details
 export async function fetchExamById(req) {
     console.log("CONNECTING TO MONGO");
     await connectMongo();
@@ -17,24 +19,25 @@ export async function fetchExams() {
     return await Exam.find().exec();
 }
 
-export async function addexam(req, res) {
+// Insert Exams
+export async function insertExam(req, res) {
     try {
         console.log("CONNECTING TO MONGO");
         await connectMongo();
         console.log("CONNECTED TO MONGO");
 
-        console.log('CREATING DOCUMENT');
-        const exam = await Question.create(req.body);
-        console.log("CREATED DOCUMENT");
+        console.log('CREATING EXAMINATION DETAIL');
+        const exam = await Exam.create(req);
+        console.log("CREATED EXAMINATION DETAIL");
 
-        res.json({exam});
+        return exam;
     } catch (error) {
         console.log(error);
-        res.json({error});
     }
 }
 
-export async function searchexam(req, res) {
+// Search Exams
+export async function searchExams(req, res) {
     try {
         console.log("CONNECTING TO MONGO");
         await connectMongo();

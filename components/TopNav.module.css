@@ -21,6 +21,12 @@
     padding: 10px 15px;
 }
 
+.navItemCurrent {
+    border: 1px solid rgb(var(--foreground-rgb));
+    border-radius: var(--border-radius);
+    background-color: rgb(var(--background-end-rgb));
+}
+
 .hamburgerMenu {
     display: none; /* Initially hide the hamburger menu on larger screens */
     position: absolute;
@@ -36,19 +42,7 @@
     width: 100%;
     height: 100%;
     position: relative;
-}
-
-.hamburgerIcon::before,
-.hamburgerIcon::after {
-    content: '';
-    position: absolute;
-    background-color: #000;
-    height: 2px;
-    width: 20px;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    transition: transform 0.3s ease;
+    top: 10px;
 }
 
 .hamburgerIcon::after {

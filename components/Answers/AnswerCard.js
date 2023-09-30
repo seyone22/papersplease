@@ -1,5 +1,7 @@
 'use client'
 import styles from './AnswerCard.module.css'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowDown, faArrowUp, faEdit, faTrashCan} from "@fortawesome/free-solid-svg-icons";
 
 function timeAgo(timestamp) {
     const now = new Date();
@@ -25,7 +27,7 @@ function timeAgo(timestamp) {
     } else if (minutes > 0) {
         return minutes === 1 ? '1 minute ago' : `${minutes} minutes ago`;
     } else {
-        return seconds === 1 ? '1 second ago' : `${seconds} seconds ago`;
+        return 'just now';
     }
 }
 
@@ -35,10 +37,9 @@ const AnswerCard = ({answer}) => {
 
         let formData = new FormData(e.target);
         try {
-            // TODO: DOES NOT SEND THE REQUEST
             let toDelete = formData.get('_id');
             console.log(toDelete);
-            const response = await fetch(`/api?_id=${encodeURIComponent(formData.get('_id'))}`, {
+            const response = await fetch(`/api/answer?_id=${encodeURIComponent(toDelete)}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -58,20 +59,38 @@ const AnswerCard = ({answer}) => {
             console.error('Error deleting answer:', error);
         }
     }
+    //WARN: POTENTIAL SECURITY RISK
     return (
-        <div className={styles.card}>
-            <li key={answer._id} className={styles.answerList}>
-                <p>{timeAgo(answer.updatedAt)}</p>
-                <p>{answer.answerBody}</p>
-                <p>{answer.author.name}</p>
-                <p>Votes: {answer.votePositive}</p>
-                {/* Displaying 'Superuser Upvoted' if the answer was upvoted by a superuser */}
-                {answer.superVotesPositive && <p>Superuser Upvoted</p>}
-                <form onSubmit={handleSubmit}>
-                    <input type={"hidden"} name={"_id"} value={answer._id}/>
-                    <button type={"submit"}>Delete</button>
-                </form>
-            </li>
+        <div key={answer._id} className={styles.card}>
+                <div className={styles.cardHeader}>
+                    <h4>{answer.author.name}</h4>
+                    <span className={styles.updatedAt}>{timeAgo(answer.updatedAt)}</span>
+                </div>
+
+
+                <div className={styles.cardBody} dangerouslySetInnerHTML={{__html: answer.answerBody}}></div>
+
+                <div className={styles.actionBar}>
+                    <div>
+                        <FontAwesomeIcon className={styles.voteIcon} icon={faArrowUp}/>
+                        <span>{answer.votePositive ? answer.votePositive : 1}</span>
+                        <FontAwesomeIcon className={styles.voteIcon} icon={faArrowDown}/>
+                    </div>
+
+                    {/* Displaying 'Superuser Upvoted' if the answer was upvoted by a superuser */}
+                    {answer.superVotesPositive && <p>Superuser Upvoted</p>}
+                    <form onSubmit={handleSubmit}>
+                        <input type={"hidden"} name={"_id"} value={answer._id}/>
+                        <button className={styles.actionBarButton} type={"submit"}><FontAwesomeIcon
+                            icon={faTrashCan}/> Delete
+                        </button>
+                    </form>
+                    <form onSubmit={handleSubmit}>
+                        <input type={"hidden"} name={"_id"} value={answer._id}/>
+                        <button className={styles.actionBarButton} type={"submit"}><FontAwesomeIcon icon={faEdit}/> Edit
+                        </button>
+                    </form>
+                </div>
         </div>
     );
 };

@@ -4,29 +4,50 @@ import DiscussionInputBox from "../../../../../components/Answers/DiscussionInpu
 import AnswerCard from "../../../../../components/Answers/AnswerCard";
 import {fetchAnswersforQuestionbyId} from "../../../../../utils/database/answerUtil";
 import {fetchQuestionById} from "../../../../../utils/database/questionUtil";
+import {unified} from "unified";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeSanitize from "rehype-sanitize";
+import rehypeStringify from "rehype-stringify";
 
 export default async function QuestionDetail({params}) {
     let currentQuestion = await fetchQuestionById(params.questionId);
     let tmp = await fetchAnswersforQuestionbyId(params.questionId);
 
-    console.log(tmp);
+    for (const answer of tmp) {
+        answer.answerBody = await unified()
+            .use(remarkParse)
+            .use(remarkRehype)
+            .use(rehypeSanitize)
+            .use(rehypeStringify)
+            .process(answer.answerBody)
+        answer.answerBody = answer.answerBody.value;
+    }
 
     return (
-        <main className={styles.main}>
+        <div>
             <TopNav/>
-            <div>
-                {JSON.stringify(currentQuestion.questionBody)}
-            </div>
-            <DiscussionInputBox/>
-            <div>
-                {
-                    tmp.map((answer, answerIndex) => (
-                        <div key={answerIndex} className={styles.grid}>
-                            <AnswerCard answer={answer}/>
-                        </div>
-                    ))
-                }
-            </div>
-        </main>
+            <main>
+                <div className={styles.questionArea}>
+                    <div className={styles.questionDescription}>
+                        Question {JSON.stringify(currentQuestion.questionNumber)}, part {currentQuestion.partNumber}
+                    </div>
+                    <div className={styles.questionHeader}
+                         dangerouslySetInnerHTML={{__html: JSON.stringify(currentQuestion.questionBody)}}/>
+                </div>
+                <div className={styles.inputBox}>
+                    <DiscussionInputBox questionId={params.questionId}/>
+                </div>
+                <div>
+                    {
+                        tmp.map((answer, answerIndex) => (
+                            <div key={answerIndex}>
+                                <AnswerCard answer={answer}/>
+                            </div>
+                        ))
+                    }
+                </div>
+            </main>
+        </div>
     )
 }
