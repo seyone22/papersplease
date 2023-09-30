@@ -4,10 +4,24 @@ import {fetchExamById} from '../../../../utils/database/examUtil'
 import TopNav from 'components/TopNav'
 import DownloadButton from "../../../../components/DownloadButton";
 import {fetchQuestionsbyPaperId} from "../../../../utils/database/questionUtil";
+import {unified} from "unified";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeSanitize from "rehype-sanitize";
+import rehypeStringify from "rehype-stringify";
 
 export default async function ExamDetail({params}) {
     let currentExam = await getExam(params.id);
     const currentQuestions = await getQuestions(params.id); // Assuming currentQuestions is an array of objects with a 'questionNumber' property
+
+    for (const question of currentQuestions) {
+        question.questionBody = await unified()
+            .use(remarkParse)
+            .use(remarkRehype)
+            .use(rehypeSanitize)
+            .use(rehypeStringify)
+            .process(question.questionBody)
+    }
 
     // Create an object to store grouped questions
     const groupedQuestions = [];
@@ -55,7 +69,7 @@ export default async function ExamDetail({params}) {
                             {
                                 questionGroup.map((qn, qnId) => (
                                     <a href={`/exam/${currentExam.id}/${qn.id}`} key={qn} className={styles.card}>
-                                        <p> {qn.questionBody} </p>
+                                        <div dangerouslySetInnerHTML={{__html: qn.questionBody}}></div>
                                     </a>
                                 ))
                             }

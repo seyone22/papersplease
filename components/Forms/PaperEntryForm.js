@@ -98,7 +98,7 @@ function PaperEntryForm() {
                     <label>Subpart Number (Optional):</label>
                     <input type="number" {...register(`questions.${index}.subpartNumber`)} />
                 </div>
-
+                {/*Integrate React-form-hook and MDEditor*/}
                 <div className={styles.formSection}>
                     <label>Question Body:</label>
                     <textarea {...register(`questions.${index}.questionBody`)} />

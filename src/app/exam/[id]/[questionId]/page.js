@@ -22,7 +22,6 @@ export default async function QuestionDetail({params}) {
             .use(rehypeStringify)
             .process(answer.answerBody)
         answer.answerBody = answer.answerBody.value;
-        console.log("BLABLABLA", answer);
     }
 
     return (
