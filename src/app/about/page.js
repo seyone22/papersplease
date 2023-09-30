@@ -17,7 +17,7 @@ const About = () => {
             <main>
                 <div className={styles.textBody}>
                     <h1>About Papers, Please!</h1>
-                    <p>
+                    <p className={styles.textBlock}>
                         Papers please is where you can find a listing of all examination papers from the University of
                         Vavuniya. You can also find their answers :).
                         This was made as a part of our second year IT2244 coursework. It&aposs a miracle it works!

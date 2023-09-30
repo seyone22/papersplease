@@ -96,3 +96,9 @@
 .icon {
     margin-right: 8px;
 }
+
+.textBlock {
+    width: 75%;
+    margin-top: 20px;
+    margin-bottom: 80px;
+}
