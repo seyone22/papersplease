@@ -167,3 +167,11 @@ button {
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
+
+ol {
+    padding-left: 1em;
+}
+
+ul {
+    padding-left: 2em;
+}

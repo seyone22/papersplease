@@ -32,9 +32,8 @@ export default async function QuestionDetail({params}) {
                     <div className={styles.questionDescription}>
                         Question {JSON.stringify(currentQuestion.questionNumber)}, part {currentQuestion.partNumber}
                     </div>
-                    <div className={styles.questionHeader}>
-                        {JSON.stringify(currentQuestion.questionBody)}
-                    </div>
+                    <div className={styles.questionHeader}
+                         dangerouslySetInnerHTML={{__html: JSON.stringify(currentQuestion.questionBody)}}/>
                 </div>
                 <div className={styles.inputBox}>
                     <DiscussionInputBox questionId={params.questionId}/>

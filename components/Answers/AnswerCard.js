@@ -61,8 +61,7 @@ const AnswerCard = ({answer}) => {
     }
     //WARN: POTENTIAL SECURITY RISK
     return (
-        <div className={styles.card}>
-            <li key={answer._id} className={styles.answerList}>
+        <div key={answer._id} className={styles.card}>
                 <div className={styles.cardHeader}>
                     <h4>{answer.author.name}</h4>
                     <span className={styles.updatedAt}>{timeAgo(answer.updatedAt)}</span>
@@ -92,7 +91,6 @@ const AnswerCard = ({answer}) => {
                         </button>
                     </form>
                 </div>
-            </li>
         </div>
     );
 };

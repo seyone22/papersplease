@@ -18,14 +18,6 @@
     margin-bottom: 0.7rem;
 }
 
-.card p {
-    margin: 0;
-    opacity: 0.6;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    max-width: 100%;
-}
-
 .updatedAt {
     font-size: 0.9em;
     color: grey;
@@ -35,8 +27,21 @@
     padding: 0 6px;
 }
 
+.cardHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: space-between;
+}
+
 .cardBody {
     margin-top: 4px !important;
+
+    margin: 0;
+    opacity: 0.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-width: 100%;
 }
 
 .actionBar {
@@ -56,16 +61,6 @@
     background-color: lightgrey;
 }
 
-.cardHeader {
-    display: flex;
-    flex-direction: row;
-    align-items: end;
-    justify-content: space-between;
-}
-
-.answerList {
-    list-style: none;
-}
 
 /* For mobile devices with a maximum width of 767px (adjust as needed) */
 @media (max-width: 767px) {

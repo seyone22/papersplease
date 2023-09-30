@@ -4,6 +4,7 @@ import {useFieldArray, useForm} from 'react-hook-form';
 import styles from './PaperEntryForm.module.css'
 
 function PaperEntryForm() {
+
     const {handleSubmit, control, register, setValue, getValues, watch} = useForm();
     const {fields, append, remove} = useFieldArray({control, name: 'questions'});
 
@@ -99,8 +100,9 @@ function PaperEntryForm() {
                     <input type="number" {...register(`questions.${index}.subpartNumber`)} />
                 </div>
                 {/*Integrate React-form-hook and MDEditor*/}
+
                 <div className={styles.formSection}>
-                    <label>Question Body:</label>
+                    <label>Question Body <em>(You can use markup to format data here.)</em>:</label>
                     <textarea {...register(`questions.${index}.questionBody`)} />
                 </div>
 

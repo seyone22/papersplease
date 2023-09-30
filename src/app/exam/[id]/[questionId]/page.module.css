@@ -81,8 +81,9 @@
 }
 
 .questionHeader {
-  font-size: 2em;
+  font-size: 1.3em;
   font-weight: bold;
+  max-width: 80%;
 }
 
 .questionDescription {

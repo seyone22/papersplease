@@ -49,14 +49,12 @@ const DiscussionInputBox = (params) => {
                         className={styles.MDEditor}
                         value={answerBody}
                         onChange={setAnswerBody}
-                        preview={"edit"}
+                        preview={"live"}
                         previewOptions={{
                             rehypePlugins: [[rehypeSanitize]],
                         }}
 
                     />
-                    <MDEditor.Markdown className={styles.MDEditorPreview} source={answerBody}
-                                       style={{whiteSpace: 'pre-wrap'}}/>
                     <button type="submit" className={styles.PostButton}>Post Answer</button>
                 </div>
             </form>
