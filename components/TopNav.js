@@ -4,6 +4,8 @@ import {useState} from 'react';
 import {usePathname} from 'next/navigation';
 
 import styles from './TopNav.module.css';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBars} from "@fortawesome/free-solid-svg-icons";
 
 const TopNav = () => {
     const pathname = usePathname();
@@ -19,7 +21,7 @@ const TopNav = () => {
                 className={`${styles.hamburgerMenu} ${showMenu ? styles.active : ''}`}
                 onClick={toggleMenu}
             >
-                <div className={styles.hamburgerIcon}></div>
+                <div className={styles.hamburgerIcon}><FontAwesomeIcon icon={faBars}/></div>
             </div>
             <ul className={`${styles.navItemList} ${showMenu ? styles.active : ''}`}>
                 <NavItem current={pathname === '/'} href="/">
@@ -33,9 +35,6 @@ const TopNav = () => {
                 </NavItem>
                 <NavItem current={pathname === '/about'} href="/about">
                     About
-                </NavItem>
-                <NavItem current={pathname === '/contact'} href="/contact">
-                    Contact
                 </NavItem>
             </ul>
         </nav>

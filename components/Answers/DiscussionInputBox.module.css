@@ -27,3 +27,12 @@
 .FormContainer {
     width: 100%;
 }
+
+.MDEditor {
+    width: 100% !important;
+}
+
+.MDEditorPreview {
+    width: 100% !important;
+    padding: 4px 8px;
+}

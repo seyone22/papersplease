@@ -1,13 +1,20 @@
 'use client'
 import styles from './DiscussionInputBox.module.css'
 import {useState} from "react";
+import MDEditor from '@uiw/react-md-editor'
+import rehypeSanitize from "rehype-sanitize";
 
 const DiscussionInputBox = (params) => {
     const [answerBody, setAnswerBody] = useState(''); // Initialize the state with an empty string
+
+    const data = {
+        answerBody: answerBody,
+        author: "651312489b1c6b9a5faba021",
+        questionId: params.questionId
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let formDataObject = Object.fromEntries(new FormData(e.target));
-        formDataObject.questionId = params.questionId;
 
         try {
             const response = await fetch('/api/answer', {
@@ -15,7 +22,7 @@ const DiscussionInputBox = (params) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formDataObject), // Convert FormData to a plain object
+                body: JSON.stringify(data), // Convert FormData to a plain object
             });
 
             if (response.ok) {
@@ -30,14 +37,26 @@ const DiscussionInputBox = (params) => {
         } catch (error) {
             console.error('Error posting answer:', error);
         }
-    }
 
+
+    }
+//TODO: Integrate simmplemde into this
     return (
         <div className={styles.FormContainer}>
             <form onSubmit={handleSubmit}>
                 <div className={styles.InputContainer}>
-                    <input type="hidden" name="author" value="651312489b1c6b9a5faba021"/>
-                    <textarea name="answerBody" className={styles.TextInput}></textarea>
+                    <MDEditor
+                        className={styles.MDEditor}
+                        value={answerBody}
+                        onChange={setAnswerBody}
+                        preview={"edit"}
+                        previewOptions={{
+                            rehypePlugins: [[rehypeSanitize]],
+                        }}
+
+                    />
+                    <MDEditor.Markdown className={styles.MDEditorPreview} source={answerBody}
+                                       style={{whiteSpace: 'pre-wrap'}}/>
                     <button type="submit" className={styles.PostButton}>Post Answer</button>
                 </div>
             </form>
