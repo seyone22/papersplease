@@ -20,11 +20,8 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    // Date and time when the user's account was created (default: current date/time)
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
+}, {
+    timestamps: true,
 });
 
 // Creating a model named "User" from the "userSchema"

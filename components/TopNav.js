@@ -19,6 +19,15 @@ const TopNav = () => {
         setShowMenu((prevShowMenu) => !prevShowMenu);
     };
 
+    const handleSignout = async () => {
+        await signOut({
+            redirect: true,
+            callbackUrl: '/', // or any other URL you want to redirect to
+            adapter: 'google' // this will hit the /logout endpoint of Google
+        })
+    }
+
+
     return (
         <nav className={styles.navContainer}>
             <div
@@ -50,7 +59,7 @@ const TopNav = () => {
                     {!session && (
                         <div className={styles.userDetail}>
                             <button
-                                onClick={() => signIn()}
+                                onClick={() => signIn('google')}
                                 className="p-2 my-2 bg-blue-500 text-white"
                             >
                                 Sign In
@@ -60,7 +69,7 @@ const TopNav = () => {
                     {session && (
                         <div className={styles.userDetail}>
                             <button
-                                onClick={() => signOut()}
+                                onClick={() => handleSignout()}
                                 className="p-2 bg-blue-500 my-2 text-white"
                             >
                                 Sign out

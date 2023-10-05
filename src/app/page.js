@@ -4,7 +4,6 @@ import {fetchExams} from "../../utils/database/examUtil";
 import TopNav from "../../components/TopNav";
 import SearchBox from "../../components/SearchBox";
 import {headers} from "next/headers";
-import ProviderWrapper from "@/app/ProviderWrapper";
 import {getSession} from "next-auth/react";
 
 async function currentSession(cookie) {
@@ -13,12 +12,13 @@ async function currentSession(cookie) {
 }
 
 export default async function Home() {
+    // Contains logged in user data.
     const session = await currentSession(headers().get('cookie') ?? '');
 
     let examList = await getData();
 
     return (
-        <ProviderWrapper>
+        <div>
             <TopNav/>
             <main>
                 <div className={styles.center}>
@@ -43,7 +43,7 @@ export default async function Home() {
                     ))}
                 </div>
             </main>
-        </ProviderWrapper>
+        </div>
     );
 }
 
